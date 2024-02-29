@@ -1,0 +1,39 @@
+<!-- slider.component.html -->
+
+<section class="home-slider-section">
+    <div class="home-slider">
+        <div *ngIf="currentIndex === 0" class="home-banner-items">
+            <div class="banner-inner-wrap darken-background" style="background-image: url(assets/images/girl.jpg);">
+                <div class="banner-content-wrap">
+                    <div class="container">
+                        <div class="banner-content text-center">
+                            <h2 class="banner-title">Magical Moments Await in Morocco</h2>
+                            <p>
+                                Explore the vibrant cities, from the historic streets of Marrakech to the coastal charm of Essaouira. Dive into the Sahara's golden dunes or wander through the captivating blue streets of Chefchaouen. Discover ancient medinas, taste the flavors of traditional cuisine, and embark on adventures that will create lasting memories.
+                            </p>
+                            <a href="#" class="button-primary">CONTINUE READING</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay"></div>
+        </div>
+
+        <div *ngIf="currentIndex === 1" class="home-banner-items">
+            <div class="banner-inner-wrap" style="background-image: url(assets/images/breakfast.jpg);">
+                <div class="banner-content-wrap">
+                    <div class="container">
+                        <div class="banner-content text-center">
+                            <h2 class="banner-title">EXPERIENCE THE NATURE'S BEAUTY</h2>
+                            <p>
+                                Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.
+                            </p>
+                            <a href="#" class="button-primary">CONTINUE READING</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay"></div>
+        </div>
+    </div>
+</section>
