@@ -1,9 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home.component";
+import {LoginComponent} from "./supplier/login/login.component";
+import {SignUpComponent} from "./supplier/sign-up/sign-up.component";
+import {CartComponent} from "./Paiement_process/cart_wishlist/cart/cart.component";
+import {PaiementFormComponent} from "./Paiement_process/paiement-form/paiement-form.component";
+import {PaiementConfirmationComponent} from "./Paiement_process/paiement-confirmation/paiement-confirmation.component";
+import {WishlistComponent} from "./Paiement_process/cart_wishlist/wishlist/wishlist.component";
 
 const routes: Routes = [
-  {path:'' , component : HomeComponent}
+  {path:'' , component : HomeComponent},
+  {path:'Admin_login' , component : LoginComponent},
+  {path:'Admin_sign_up' , component : SignUpComponent},
+  {path:'Cart' , component : CartComponent},
+  {path:'paiement' , component : PaiementFormComponent},
+  {path:'confirmation' , component : PaiementConfirmationComponent},
+  {path:'wishlist' , component : WishlistComponent}
+
 ];
 
 @NgModule({

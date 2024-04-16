@@ -12,12 +12,23 @@ import { HomeComponent } from './home/home.component';
 import { TopActivitiesComponent } from './home/top-activities/top-activities.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
-import { SliderComponent } from "./home/slider/slider.component";
-import { CategoryComponent } from './home/category/category.component';
+
 import { HttpClientModule } from "@angular/common/http";
+import {SliderComponent} from "./home/slider/slider.component";
+import { FamousPlacesComponent } from './home/famous-places/famous-places.component';
+import { LoginComponent } from './supplier/login/login.component';
+import { SignUpComponent } from './supplier/sign-up/sign-up.component';
+import { CartComponent } from './Paiement_process/cart_wishlist/cart/cart.component';
+import {PaiementFormComponent} from "./Paiement_process/paiement-form/paiement-form.component";
+import {PaiementConfirmationComponent} from "./Paiement_process/paiement-confirmation/paiement-confirmation.component";
+import { WishlistComponent } from './Paiement_process/cart_wishlist/wishlist/wishlist.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MatIconModule} from "@angular/material/icon";
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,16 +37,26 @@ import { HttpClientModule } from "@angular/common/http";
     TopActivitiesComponent,
     HeaderComponent,
     FooterComponent,
-    CategoryComponent,
+    FamousPlacesComponent,
+    LoginComponent,
+    SignUpComponent,
+    CartComponent,
+    PaiementFormComponent,
+    PaiementConfirmationComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     CommonModule,
+      FormsModule,
+      MatSlideToggleModule
 
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
