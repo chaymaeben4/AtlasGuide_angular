@@ -30,6 +30,7 @@ import { CallbackComponent } from './home/callback/callback.component';
 import { TestimonialComponent } from './home/testimonial/testimonial.component';
 import { ActivityDetailsComponent } from './activity-details/activity-details.component';
 import { BodyDetailsComponent } from './activity-details/body-details/body-details.component';
+import { DetailsHeaderComponent } from './activity-details/details-header/details-header.component';
 
 
 
@@ -53,7 +54,8 @@ import { BodyDetailsComponent } from './activity-details/body-details/body-detai
     CallbackComponent,
     TestimonialComponent,
     ActivityDetailsComponent,
-    BodyDetailsComponent
+    BodyDetailsComponent,
+    DetailsHeaderComponent
   ],
   imports: [
     BrowserModule,
