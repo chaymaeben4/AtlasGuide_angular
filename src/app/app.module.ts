@@ -25,6 +25,11 @@ import { WishlistComponent } from './Paiement_process/cart_wishlist/wishlist/wis
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatIconModule} from "@angular/material/icon";
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CitiesComponent } from './home/cities/cities.component';
+import { CallbackComponent } from './home/callback/callback.component';
+import { TestimonialComponent } from './home/testimonial/testimonial.component';
+import { ActivityDetailsComponent } from './activity-details/activity-details.component';
+import { BodyDetailsComponent } from './activity-details/body-details/body-details.component';
 
 
 
@@ -43,7 +48,12 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     CartComponent,
     PaiementFormComponent,
     PaiementConfirmationComponent,
-    WishlistComponent
+    WishlistComponent,
+    CitiesComponent,
+    CallbackComponent,
+    TestimonialComponent,
+    ActivityDetailsComponent,
+    BodyDetailsComponent
   ],
   imports: [
     BrowserModule,
