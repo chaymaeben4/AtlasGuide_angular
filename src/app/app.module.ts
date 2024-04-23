@@ -34,6 +34,7 @@ import { DetailsHeaderComponent } from './activity-details/details-header/detail
 
 
 
+
 // @ts-ignore
 @NgModule({
   declarations: [
