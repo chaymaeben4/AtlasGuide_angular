@@ -1,16 +1,30 @@
-import {Component, ElementRef, Renderer2} from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
+import {ActivityService} from "../../../service/activity/activity.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-body-details',
   templateUrl: './body-details.component.html',
   styleUrl: './body-details.component.css'
 })
-export class BodyDetailsComponent {
+export class BodyDetailsComponent implements OnInit{
   isDescriptionTabSelected = true;
   isProgramTabSelected = false;
   isReviewTabSelected = false;
   isMapTabSelected = false;
-  constructor(private renderer: Renderer2, private el: ElementRef) { }
+  activityId !: number;
+
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id !== null) {
+        this.activityId = +id;
+
+      }
+    });
+  }
+  constructor(private renderer: Renderer2, private el: ElementRef , private activityService : ActivityService, private route: ActivatedRoute) { }
 
   onProgramTabClick() {
     this.isProgramTabSelected=true;
@@ -49,5 +63,11 @@ export class BodyDetailsComponent {
     const Content = this.el.nativeElement.querySelector('.overview-content');
     this.renderer.setProperty(Content, 'innerHTML', mapContent);
   }
+
+
+
+  //data
+
+
 
 }

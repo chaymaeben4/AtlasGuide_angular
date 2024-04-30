@@ -43,61 +43,27 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            <tr *ngFor="let activity of cart.activityList ; let i = index">
                                 <td class="">
                                     <button class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="cartImage"><img src="../../../../assets/images/img5.jpg" alt="image"></span>
+                                    <span class="cartImage"><img src="{{cart.activityList[i].image_path}}" alt="image"></span>
                                 </td>
-                                <td data-column="Product Name">Sunset view of beautiful lakeside resident</td>
-                                <td data-column="Price">$ 1100.00</td>
+                                <td data-column="Product Name">{{cart.activityList[i].designation}}</td>
+                                <td data-column="Price">$ {{cart.activityList[i].price}}</td>
                                 <td data-column="Quantity" class="count-input">
                                     <div>
-                                        <a class="minus-btn" href="#"><i class="fa fa-minus"></i></a>
-                                        <input class="quantity" type="text" value="1">
-                                        <a class="plus-btn" href="#"><i class="fa fa-plus"></i></a>
+                                        <a class="minus-btn" (click)="decrementQuantity()" ><i class="fa fa-minus"></i></a>
+                                        <input class="quantity" type="text" value="{{quantity}}">
+                                        <a class="plus-btn" (click)="incrementQuantity()"><i class="fa fa-plus"></i></a>
                                     </div>
                                 </td>
-                                <td data-column="Sub Total">$ 1100.00</td>
+                                <td data-column="Sub Total">$ {{ calculateSubtotal(cart.activityList[i].price, quantity) }}</td>
                             </tr>
                             </tbody>
-                            <tbody>
-                            <tr>
-                                <td class="">
-                                    <button class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="cartImage"><img src="../../../../assets/images/img6.jpg" alt="image"></span>
-                                </td>
-                                <td data-column="Product Name">Experience the natural beauty of island</td>
-                                <td data-column="Price">$ 1150.00</td>
-                                <td data-column="Quantity" class="count-input">
-                                    <div>
-                                        <a class="minus-btn" href="#"><i class="fa fa-minus"></i></a>
-                                        <input class="quantity" type="text" value="1">
-                                        <a class="plus-btn" href="#"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </td>
-                                <td data-column="Sub Total">$ 1150.00</td>
-                            </tr>
-                            </tbody>
-                            <tbody>
-                            <tr>
-                                <td class="">
-                                    <button class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                    <span class="cartImage"><img src="../../../../assets/images/img7.jpg" alt="image"></span>
-                                </td>
-                                <td data-column="Product Name">Vacation to the water city of Portugal</td>
-                                <td data-column="Price">$ 1150.00</td>
-                                <td data-column="Quantity" class="count-input">
-                                    <div>
-                                        <a class="minus-btn" href="#"><i class="fa fa-minus"></i></a>
-                                        <input class="quantity" type="text" value="1">
-                                        <a class="plus-btn" href="#"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </td>
-                                <td data-column="Sub Total">$ 1150.00</td>
-                            </tr>
-                            </tbody>
+
                         </table>
                     </div>
+
 <!--                    <div class="updateArea">-->
 <!--                        <div class="input-group">-->
 <!--                            <input type="text" class="form-control" placeholder="I have a discount coupon">-->
@@ -113,7 +79,7 @@
                         </ul>
                     </div>
                     <div class="checkBtnArea text-right">
-                        <a href="#" routerLink="/paiement" class="button-primary">checkout</a>
+                        <a  routerLink="/paiement" class="button-primary">checkout</a>
                     </div>
                 </form>
             </div>
@@ -121,3 +87,6 @@
         </div>
     </div>
 </main>
+<app-footer></app-footer>
+
+
