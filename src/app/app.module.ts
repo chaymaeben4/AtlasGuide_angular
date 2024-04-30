@@ -35,6 +35,7 @@ import {SlickCarouselModule} from "ngx-slick-carousel";
 
 
 
+
 // @ts-ignore
 @NgModule({
   declarations: [
