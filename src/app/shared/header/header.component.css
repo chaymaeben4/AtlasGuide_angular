@@ -46,5 +46,33 @@
         width: 250px;
     }
 }
+.container_search {
+    position: relative;
+}
+
+.suggestions {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-top: none;
+    position: absolute;
+    top: calc(100% + 5px); /* Place la liste 5px en dessous de l'entrée de texte */
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.suggestions li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.suggestions li:hover {
+    background-color: #f2f2f2;
+}
+
 
 
