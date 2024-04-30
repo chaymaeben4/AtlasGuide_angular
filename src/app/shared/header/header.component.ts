@@ -2,6 +2,31 @@ import {Component, OnInit} from '@angular/core';
 import { Router} from "@angular/router";
 
 
+enum City {
+  Agadir = 'Agadir',
+  AlHoceima = 'Al Hoceima',
+  Asilah = 'Asilah',
+  Casablanca = 'Casablanca',
+  Chefchaouen = 'Chefchaouen',
+  ElJadida = 'El Jadida',
+  Errachidia = 'Errachidia',
+  Essaouira = 'Essaouira',
+  Fes = 'Fes',
+  Ifrane = 'Ifrane',
+  Marrakech = 'Marrakech',
+  Meknes = 'Meknes',
+  Nador = 'Nador',
+  Ouarzazate = 'Ouarzazate',
+  Oujda = 'Oujda',
+  Rabat = 'Rabat',
+  Safi = 'Safi',
+  Tanger = 'Tanger',
+  Taroudant = 'Taroudant',
+  Tetouan = 'Tetouan',
+  Zagora = 'Zagora'
+}
+
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -27,5 +52,25 @@ export class HeaderComponent implements OnInit{
         this.isLightTheme ? 'light' : 'dark'
     );
   }
+  cities = Object.values(City);
+  searchText: string = "";
+  filteredCities: string[] = [];
+
+  filterCities() {
+    if (this.searchText) {
+      this.filteredCities = this.cities.filter((city: City) =>
+          city.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    } else {
+      this.filteredCities = [];
+    }
+  }
+
+
+  selectCity(city: string) {
+    this.searchText = city;
+    this.filteredCities = [];
+  }
+
 
 }
