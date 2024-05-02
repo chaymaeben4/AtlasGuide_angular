@@ -32,6 +32,7 @@ import { DetailsHeaderComponent } from './activity-details/details-header/detail
 import {TopActivitiesComponent} from "./home/top-activities/top-activities.component";
 import {CartComponent} from "./Paiement_process/cart_wishlist/cart/cart.component";
 import {SlickCarouselModule} from "ngx-slick-carousel";
+import { ActivitesByCityComponent } from './activites-by-city/activites-by-city.component';
 
 
 
@@ -57,7 +58,8 @@ import {SlickCarouselModule} from "ngx-slick-carousel";
     TestimonialComponent,
     ActivityDetailsComponent,
     BodyDetailsComponent,
-    DetailsHeaderComponent
+    DetailsHeaderComponent,
+    ActivitesByCityComponent
   ],
   imports: [
     BrowserModule,

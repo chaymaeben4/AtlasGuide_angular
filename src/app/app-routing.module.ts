@@ -8,6 +8,7 @@ import {PaiementFormComponent} from "./Paiement_process/paiement-form/paiement-f
 import {PaiementConfirmationComponent} from "./Paiement_process/paiement-confirmation/paiement-confirmation.component";
 import {WishlistComponent} from "./Paiement_process/cart_wishlist/wishlist/wishlist.component";
 import {ActivityDetailsComponent} from "./activity-details/activity-details.component";
+import {ActivitesByCityComponent} from "./activites-by-city/activites-by-city.component";
 
 const routes: Routes = [
   {path:'' , component : HomeComponent},
@@ -18,7 +19,7 @@ const routes: Routes = [
   {path:'confirmation' , component : PaiementConfirmationComponent},
   {path:'wishlist' , component : WishlistComponent},
   {path:'Details/:id' , component : ActivityDetailsComponent},
-
+  {path:'activities/:city' , component : ActivitesByCityComponent}
 ];
 
 @NgModule({

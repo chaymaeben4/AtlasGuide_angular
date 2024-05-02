@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Activity} from "../../model/Activity.model";
+import {City} from "../../model/enumeration/City.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +32,9 @@ export class ActivityService {
 
   getActivity(activity_id : number) : Observable<Activity>{
     return this.http.get<Activity>(`${this.baseUrl}/${activity_id}`);
+  }
+
+  getActivityByCity(city : City ) : Observable<Activity>{
+    return this.http.get<Activity>(`${this.baseUrl}/activities/city/${city}`);
   }
 }

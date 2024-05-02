@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ClientService} from "../../services/client.service";
 import {Activity} from "../../../model/Activity.model";
 import {ActivityService} from "../../../service/activity/activity.service";
 

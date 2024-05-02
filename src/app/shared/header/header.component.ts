@@ -1,30 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import { Router} from "@angular/router";
+import {City} from "../../../model/enumeration/City.enum";
 
 
-enum City {
-  Agadir = 'Agadir',
-  AlHoceima = 'Al Hoceima',
-  Asilah = 'Asilah',
-  Casablanca = 'Casablanca',
-  Chefchaouen = 'Chefchaouen',
-  ElJadida = 'El Jadida',
-  Errachidia = 'Errachidia',
-  Essaouira = 'Essaouira',
-  Fes = 'Fes',
-  Ifrane = 'Ifrane',
-  Marrakech = 'Marrakech',
-  Meknes = 'Meknes',
-  Nador = 'Nador',
-  Ouarzazate = 'Ouarzazate',
-  Oujda = 'Oujda',
-  Rabat = 'Rabat',
-  Safi = 'Safi',
-  Tanger = 'Tanger',
-  Taroudant = 'Taroudant',
-  Tetouan = 'Tetouan',
-  Zagora = 'Zagora'
-}
+
 
 
 @Component({
@@ -70,6 +49,7 @@ export class HeaderComponent implements OnInit{
   selectCity(city: string) {
     this.searchText = city;
     this.filteredCities = [];
+    this.router.navigate(['/activities', city]);
   }
 
 

@@ -51,8 +51,8 @@
             <!-- Recherche -->
             <div class="container_search" *ngIf="isHomepage">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" [(ngModel)]="searchText" (input)="filterCities()" placeholder="Your destination">
-                <div class="search">Search</div>
+                <input type="text" [(ngModel)]="searchText" (input)="filterCities()" placeholder="Your destination" >
+                <div class="search" >Search</div>
                 <ul *ngIf="filteredCities.length > 0" class="suggestions">
                     <li *ngFor="let city of filteredCities" (click)="selectCity(city)">{{ city }}</li>
                 </ul>

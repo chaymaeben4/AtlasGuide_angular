@@ -1,4 +1,4 @@
-enum City {
+export enum City {
     Agadir = 'Agadir',
     AlHoceima = 'Al Hoceima',
     Asilah = 'Asilah',
