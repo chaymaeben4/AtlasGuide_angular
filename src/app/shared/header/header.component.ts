@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import { Router} from "@angular/router";
+import {City} from "../../../model/enumeration/City.enum";
+
+
+
 
 
 @Component({
@@ -27,5 +31,26 @@ export class HeaderComponent implements OnInit{
         this.isLightTheme ? 'light' : 'dark'
     );
   }
+  cities = Object.values(City);
+  searchText: string = "";
+  filteredCities: string[] = [];
+
+  filterCities() {
+    if (this.searchText) {
+      this.filteredCities = this.cities.filter((city: City) =>
+          city.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    } else {
+      this.filteredCities = [];
+    }
+  }
+
+
+  selectCity(city: string) {
+    this.searchText = city;
+    this.filteredCities = [];
+    this.router.navigate(['/activities', city]);
+  }
+
 
 }
