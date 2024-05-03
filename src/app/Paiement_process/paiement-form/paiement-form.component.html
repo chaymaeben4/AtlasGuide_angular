@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header xmlns="http://www.w3.org/1999/html"></app-header>
 <main id="content" class="site-main">
     <!-- Inner Banner html start-->
     <section class="inner-banner-wrap">
@@ -25,11 +25,11 @@
                 </div>
                 <div class="step-item">
                     Finish
-                    <a href="confirmation" class="step-icon"></a>
+                    <a href="" class="step-icon"></a>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8 right-sidebar">
+                <div class="col-lg-11 mx-auto">
                     <!-- step one form html start -->
                     <div class="booking-form-wrap">
                         <div class="booking-content">
@@ -38,34 +38,41 @@
                                 <h3>Your Details</h3>
                             </div>
                             <div class="row">
+
                                 <div class="col-sm-6">
                                     <div class="form-group">
+
                                         <label>First name*</label>
-                                        <input type="text" class="form-control" name="firstname_booking">
+                                        <input type="text" class="form-control" name="firstname_booking" id="first-name" [(ngModel)]="firstName" (blur)="validateFirstName()">
+                                      <div *ngIf="firstNameError" class="alert alert-danger" role="alert">{{ firstNameError }}</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Last name*</label>
-                                        <input type="text" class="form-control" name="lastname_booking">
+                                        <input type="text" class="form-control" name="lastname_booking" id="last-name" [(ngModel)]="lastName" (blur)="validateLastName()">
+                                      <div *ngIf="lastNameError" class="alert alert-danger" role="alert">{{ lastNameError }}</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Email*</label>
-                                        <input type="email" class="form-control" name="email_booking">
+                                        <input type="email" class="form-control" name="email_booking" [(ngModel)]="email" (blur)="validateEmail()" >
+                                      <div *ngIf="emailError" class="alert alert-danger" role="alert">{{ emailError }}</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Confirm Email*</label>
-                                        <input type="email" class="form-control" name="email_booking">
+                                        <input type="email" class="form-control" name="email_booking" id="email" [(ngModel)]="confirmEmail" (blur)="validateConfirmEmail()">
+                                      <div *ngIf="confirmEmailError" class="alert alert-danger" role="alert">{{ confirmEmailError }}</div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Phone*</label>
-                                        <input type="text" class="form-control" name="lastname_booking">
+                                        <input type="text" class="form-control" name="lastname_booking" id="phone" [(ngModel)]="phoneNumber" (blur)="validatePhoneNumber()">
+                                      <div *ngIf="phoneNumberError" class="alert alert-danger" role="alert">{{ phoneNumberError }}</div>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +89,8 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label>Card number*</label>
-                                                <input type="text" id="card_number" name="cardNumber" class="form-control">
+                                                <input type="text" id="card_number" name="cardNumber" class="form-control" [(ngModel)]="cardNumber" (blur)="validateCardNumber()">
+                                              <div *ngIf="cardNumberError" class="alert alert-danger" role="alert">{{ cardNumberError }}</div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
@@ -97,12 +105,14 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <input type="text" id="expire_month" name="expMonth" class="form-control" placeholder="MM">
+                                                        <input type="text" id="expire_month" name="expMonth" class="form-control" placeholder="MM" [(ngModel)]="expirationMonth" (blur)="validateExpirationMonth()">
+                                                      <div *ngIf="expirationMonthError" class="alert alert-danger" role="alert">{{ expirationMonthError }}</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <input type="text" id="expire_year" name="expYear" class="form-control" placeholder="Year">
+                                                        <input type="text" id="expire_year" name="expYear" class="form-control" placeholder="Year" [(ngModel)]="expirationYear" (blur)="validateExpirationYear()">
+                                                      <div *ngIf="expirationYearError" class="alert alert-danger" role="alert">{{ expirationYearError }}</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -113,7 +123,8 @@
                                                 <div class="row">
                                                     <div class="col-4">
                                                         <div class="form-group">
-                                                            <input type="text" id="ccv" name="cvc" class="form-control" placeholder="CCV">
+                                                            <input type="text" id="ccv" name="cvc" class="form-control" placeholder="CCV" [(ngModel)]="ccv" (blur)="validateCCV()">
+                                                          <div *ngIf="ccvError" class="alert alert-danger" role="alert">{{ ccvError }}</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-8">
@@ -125,90 +136,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="info-content">
-                                <h4>Or checkout with Paypal</h4>
-                                <p>Lorem ipsum dolor sit amet, vim id accusata sensibus, id ridens quaeque qui. Ne qui vocent ornatus molestie, reque fierent dissentiunt mel ea.</p>
-                                <a href="#">
-                                    <img src="assets/images/paypal_bt.html" alt="">
-                                </a>
-                            </div>
+
                         </div>
                         <div class="form-policy">
-                            <h3>Cancellation policy</h3>
-                            <div class="form-group">
-                                <label class="checkbox-list">
-                                    <input type="checkbox" name="s">
-                                    <span class="custom-checkbox"></span>
-                                    I accept terms and conditions and general policy.
-                                </label>
-                            </div>
-                            <button  (click)="chargeCreditCard()" class="button-primary" >Book Now</button>
+                            <button routerLink="/confirmation"  type="button" [disabled]="!areAllFieldsValid()" (click)="chargeCreditCard()" class="button-primary"  >Book Now</button>
+                          <button (click)="areAllFieldsValid()" >check</button>
                         </div>
                     </div>
-                    <!-- step one form html end -->
+
                 </div>
-                <div class="col-lg-4">
-                    <aside class="sidebar">
-                        <div class="widget-bg widget-table-summary">
-                            <h4 class="bg-title">Summary</h4>
-                            <table>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <strong>Packages cost </strong>
-                                    </td>
-                                    <td class="text-right">
-                                        $300
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Dedicated tour guide</strong>
-                                    </td>
-                                    <td class="text-right">
-                                        $34
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Insurance</strong>
-                                    </td>
-                                    <td class="text-right">
-                                        $34
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>tax</strong>
-                                    </td>
-                                    <td class="text-right">
-                                        13%
-                                    </td>
-                                </tr>
-                                <tr class="total">
-                                    <td>
-                                        <strong>Total cost</strong>
-                                    </td>
-                                    <td class="text-right">
-                                        <strong>$368</strong>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="widget-bg widget-support-wrap">
-                            <div class="icon">
-                                <i class="fas fa-phone-volume"></i>
-                            </div>
-                            <div class="support-content">
-                                <h5>HELP AND SUPPORT</h5>
-                                <a href="telto:12345678" class="phone">+11 234 889 00</a>
-                                <small>Monday to Friday 9.00am - 7.30pm</small>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
+
             </div>
+
+
+
         </div>
+
     </div>
 </main>
+
