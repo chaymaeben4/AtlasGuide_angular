@@ -1,3 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.mat-dialog-content {
+  margin: 2000px;
+}
 /*------------------------------------------------------------------
 * Project:        Travele
 * Author:         Bosa Themes
@@ -504,8 +516,8 @@ a:visited {
 }
 @media screen and (max-width: 575px) {
   .outline-primary,
-.outline-round, .button-primary,
-.button-round {
+  .outline-round, .button-primary,
+  .button-round {
     font-size: 14px;
     padding: 10px 20px;
   }
@@ -515,7 +527,7 @@ input[type=button],
 input[type=reset],
 input[type=submit] {
   border: none;
-  background-color: #0791BE;
+  background-color: #0757ee;
   color: #ffffff;
   cursor: pointer;
   padding: 12px 30px;
@@ -570,7 +582,7 @@ input[type=submit]:focus {
 }
 @media screen and (max-width: 575px) {
   .outline-primary,
-.outline-round {
+  .outline-round {
     padding: 8px 20px;
   }
 }
@@ -643,13 +655,13 @@ input[type=datetime],
 input[type=datetime-local],
 input[type=color],
 textarea {
-  background-color: #ffffff;
-  border: 1px solid #d9d9d9;
+  background-color: AliceBlue;
+  border: 1px solid rgba(136, 170, 236, 0.8);
   font-size: 14px;
   -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  border-radius: 0px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
   height: 45px;
   resize: none;
   padding: 0 10px;
@@ -751,7 +763,7 @@ textarea {
 
 select {
   border: 1px solid #d9d9d9;
-  background-image: url(assets/images/arrow.png);
+
   background-repeat: no-repeat;
   background-position: center right 15px;
   -webkit-appearance: none;
@@ -812,7 +824,7 @@ form label {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
   -ms-border-radius: 0px;
-  border-radius: 0px;
+  border-radius: 10px;
 }
 .form-group label {
   display: block;
@@ -968,126 +980,6 @@ input:checked ~ .custom-input-field:before {
   flex-wrap: wrap;
 }
 
-/* -----------------------------------
-/*Dashboard navigation
-------------------------------------- */
-.dashboard-navigation {
-  background-color: #292929;
-  float: left;
-  width: 20%;
-  padding-top: 75px;
-  position: fixed;
-  top: 0;
-  height: 100%;
-  z-index: 99;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-@media screen and (min-width: 768px) {
-  .dashboard-navigation #navigation {
-    display: block !important;
-  }
-  .dashboard-navigation .slicknav_menu .slicknav_btn {
-    display: none;
-  }
-}
-@media screen and (max-width: 991px) {
-  .dashboard-navigation {
-    width: 30%;
-  }
-}
-@media screen and (max-width: 767px) {
-  .dashboard-navigation {
-    width: 100%;
-    position: static;
-    padding: 0;
-  }
-}
-.dashboard-navigation ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.dashboard-navigation li {
-  color: #ffffff;
-  font-size: 15px;
-  position: relative;
-}
-.dashboard-navigation li.open-menu:before {
-  color: #4d4d4d;
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
-.dashboard-navigation li.open-menu ul {
-  opacity: 1;
-  display: block;
-}
-.dashboard-navigation li:hover > a {
-  background-color: #373737;
-}
-.dashboard-navigation li.slicknav_open a, .dashboard-navigation li.active-menu a {
-  background-color: #373737;
-}
-.dashboard-navigation a {
-  display: block;
-  font-size: 14px;
-  padding: 10px 0px;
-  border-bottom: 1px solid #595959;
-  padding: 15px 20px;
-  color: #ffffff;
-  -webkit-transition: background-color 0.4s;
-  -moz-transition: background-color 0.4s;
-  -ms-transition: background-color 0.4s;
-  -o-transition: background-color 0.4s;
-  transition: background-color 0.4s;
-}
-.dashboard-navigation a:not([href]) {
-  color: inherit;
-  padding: 0;
-  border-bottom: none;
-  display: inline-block;
-}
-.dashboard-navigation a .slicknav_arrow {
-  float: right;
-}
-.dashboard-navigation a i {
-  margin-right: 5px;
-  font-size: 12px;
-}
-@media screen and (max-width: 767px) {
-  .dashboard-navigation .slicknav_menu .slicknav_btn {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    -moz-align-items: center;
-    -ms-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-justify-content: space-between;
-    -moz-justify-content: space-between;
-    -ms-justify-content: space-between;
-    justify-content: space-between;
-    -ms-flex-pack: space-between;
-  }
-}
-.dashboard-navigation .slicknav_icon {
-  display: inline-block;
-  width: 30px;
-  padding: 5px;
-}
-.dashboard-navigation .slicknav_icon .slicknav_icon-bar {
-  background-color: #ffffff;
-  display: block;
-  width: 100%;
-  height: 3px;
-  margin-bottom: 3px;
-}
 
 /* -----------------------------------
 /*Dashboard header
@@ -1169,6 +1061,7 @@ input:checked ~ .custom-input-field:before {
   float: right;
 }
 
+
 /* -----------------------------------
 /*Dashboard Footer
 ------------------------------------- */
@@ -1184,6 +1077,128 @@ input:checked ~ .custom-input-field:before {
   #dashboard .copyrights {
     padding: 20px 15px;
   }
+}
+/* -----------------------------------
+/*Dashboard navigation
+------------------------------------- */
+.dashboard-navigation {
+  background-image: linear-gradient(270deg, #4576a1 0%, #69b6ea 100%);
+  float: left;
+  width: 17%;
+  height: 100%;
+  padding-top: 75px;
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+@media screen and (min-width: 768px) {
+  .dashboard-navigation #navigation {
+    display: block !important;
+  }
+  .dashboard-navigation .slicknav_menu .slicknav_btn {
+    display: none;
+
+  }
+}
+@media screen and (max-width: 991px) {
+  .dashboard-navigation {
+    width: auto;
+  }
+}
+@media screen and (max-width: 767px) {
+  .dashboard-navigation {
+    height: auto;
+    width: 100%;
+    position: static;
+    padding: 0;
+  }
+}
+.dashboard-navigation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.dashboard-navigation li {
+  color: #ffffff;
+  font-size: 15px;
+  position: relative;
+}
+.dashboard-navigation li.open-menu:before {
+  color: #ffffff;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.dashboard-navigation li.open-menu ul {
+  opacity: 1;
+  display: block;
+}
+.dashboard-navigation li:hover > a {
+  background-color: linear-gradient(270deg, #4576a1 0%, #69b6ea 100%);
+}
+.dashboard-navigation li.slicknav_open a, .dashboard-navigation li.active-menu a {
+  background-color: linear-gradient(270deg, #4576a1 0%, #69b6ea 100%);
+}
+.dashboard-navigation a {
+  display: block;
+  font-size: 14px;
+  padding: 10px 0px;
+  border-bottom: 1px solid #ffffff;
+  padding: 15px 20px;
+  color: #ffffff;
+  -webkit-transition: background-color 0.4s;
+  -moz-transition: background-color 0.4s;
+  -ms-transition: background-color 0.4s;
+  -o-transition: background-color 0.4s;
+  transition: background-color 0.4s;
+}
+.dashboard-navigation a:not([href]) {
+  color: inherit;
+  padding: 0;
+  border-bottom: none;
+  display: inline-block;
+}
+.dashboard-navigation a .slicknav_arrow {
+  float: right;
+}
+.dashboard-navigation a i {
+  margin-right: 5px;
+  font-size: 12px;
+}
+@media screen and (max-width: 767px) {
+  .dashboard-navigation .slicknav_menu .slicknav_btn {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    -ms-justify-content: space-between;
+    justify-content: space-between;
+    -ms-flex-pack: space-between;
+  }
+}
+.dashboard-navigation .slicknav_icon {
+  display: inline-block;
+  width: 30px;
+  padding: 5px;
+}
+.dashboard-navigation .slicknav_icon .slicknav_icon-bar {
+  background-color: #ffffff;
+  display: block;
+  width: 100%;
+  height: 3px;
+  margin-bottom: 3px;
 }
 
 /* -----------------------------------
@@ -1376,6 +1391,20 @@ input:checked ~ .custom-input-field:before {
   color: #ffffff;
 }
 
+.notify1 {
+  background-color: #F56960;
+  position: absolute;
+  top: 6px;
+  left: 120px;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 20px;
+}
+
 .notify {
   background-color: #F56960;
   position: absolute;
@@ -1402,10 +1431,17 @@ input:checked ~ .custom-input-field:before {
 .db-info-wrap {
   background: #e8edf2;
   float: left;
-  width: 80%;
+  width: 83%;
+  padding: 60px 40px 40px;
+  margin-left: 17%;
+  margin-top: 60px;
+}
+.db-info-wrap1{
+  background: #074d99;
+  float: RIGHT;
+  width: 100%;
   padding: 60px 40px 40px;
   margin-left: 20%;
-  margin-top: 60px;
 }
 @media screen and (max-width: 991px) {
   .db-info-wrap {
@@ -1418,6 +1454,9 @@ input:checked ~ .custom-input-field:before {
     width: 100%;
     margin: 0;
     padding: 30px 20px;
+  }
+  #dashboard{
+    display: block;
   }
 }
 
@@ -1919,7 +1958,6 @@ login form css
   background: #fff;
   padding: 40px;
   border-radius: 6px;
-  box-shadow: 0px 0px 50px 2px rgba(0, 0, 0, 0.51);
 }
 .login-page .login-from-wrap .button-primary {
   display: block;
@@ -1930,7 +1968,7 @@ login form css
   display: block;
   text-align: right;
   padding-top: 15px;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 700;
 }
 @media screen and (max-width: 575px) {
@@ -2095,3 +2133,4 @@ login form css
 }
 
 /*# sourceMappingURL=style.css.map */
+
