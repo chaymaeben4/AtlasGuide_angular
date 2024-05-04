@@ -9,6 +9,8 @@ import {PaiementConfirmationComponent} from "./Paiement_process/paiement-confirm
 import {WishlistComponent} from "./Paiement_process/cart_wishlist/wishlist/wishlist.component";
 import {ActivityDetailsComponent} from "./activity-details/activity-details.component";
 import {ActivitesByCityComponent} from "./activites-by-city/activites-by-city.component";
+import {resolve} from "@angular/compiler-cli";
+import {PaymentResolver} from "./resolvers/payment.resolver";
 
 const routes: Routes = [
   {path:'' , component : HomeComponent},
@@ -16,7 +18,7 @@ const routes: Routes = [
   {path:'Admin_sign_up' , component : SignUpComponent},
   {path:'Cart' , component : CartComponent},
   {path:'paiement' , component : PaiementFormComponent},
-  {path:'confirmation' , component : PaiementConfirmationComponent},
+  {path:'confirmation' , component : PaiementConfirmationComponent , resolve: { state: PaymentResolver}},
   {path:'wishlist' , component : WishlistComponent},
   {path:'Details/:id' , component : ActivityDetailsComponent},
   {path:'activities/:city' , component : ActivitesByCityComponent}

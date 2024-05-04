@@ -7678,6 +7678,26 @@ product checkout css
 /*--------------------------------------------------------------
 >>> confirmation Pages
 ----------------------------------------------------------------*/
+.failure-notify{
+  background-color: #F44F4F;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  padding: 30px;
+  color: #ffffff;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  border-radius: 6px;
+  margin-bottom: 60px;
+}
 .success-notify {
     background-color: #0791BE;
     display: -webkit-box;
@@ -7710,17 +7730,38 @@ product checkout css
     text-align: center;
     font-size: 28px;
 }
+.failure-notify .failure-icon i {
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  border-radius: 100%;
+  border: 3px solid #ffffff;
+  line-height: 80px;
+  height: 80px;
+  width: 100px;
+  text-align: center;
+  font-size: 28px;
+}
 .success-notify .success-content {
     margin-left: 20px;
+}
+.failure-notify .failure-content {
+  margin-left: 20px;
 }
 .success-notify .success-content h3 {
     margin-bottom: 5px;
     color: #ffffff;
 }
+.failure-notify .failure-content h3 {
+  margin-bottom: 5px;
+  color: #ffffff;
+}
 .success-notify .success-content p {
     margin-bottom: 0;
 }
-
+.failure-notify .failure-content p {
+  margin-bottom: 0;
+}
 .confirmation-details h3 {
     margin-bottom: 25px;
 }

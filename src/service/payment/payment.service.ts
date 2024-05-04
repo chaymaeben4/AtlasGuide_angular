@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, Subject} from "rxjs";
+import {PaymentDetails} from "../../model/PaymentDetails.model";
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ import {Observable, Subject} from "rxjs";
 export class PaymentService {
 
   private apiUrl = 'http://localhost:8081/api/payment/charge';
+  private _paymentDetails!:PaymentDetails;
   private paymentMessageSubject = new Subject<string>();
   paymentMessage$: Observable<string> = this.paymentMessageSubject.asObservable();
 
@@ -27,5 +29,14 @@ export class PaymentService {
 
   updatePaymentStatus(message: string) {
     this.paymentMessageSubject.next(message);
+  }
+
+
+  set paymentDetails(value: PaymentDetails) {
+    this._paymentDetails = value;
+  }
+
+  get paymentDetails(): PaymentDetails {
+    return this._paymentDetails;
   }
 }

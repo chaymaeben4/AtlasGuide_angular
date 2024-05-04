@@ -31,8 +31,9 @@ import { BodyDetailsComponent } from './activity-details/body-details/body-detai
 import { DetailsHeaderComponent } from './activity-details/details-header/details-header.component';
 import {TopActivitiesComponent} from "./home/top-activities/top-activities.component";
 import {CartComponent} from "./Paiement_process/cart_wishlist/cart/cart.component";
-import {SlickCarouselModule} from "ngx-slick-carousel";
+// import {SlickCarouselModule} from "ngx-slick-carousel";
 import { ActivitesByCityComponent } from './activites-by-city/activites-by-city.component';
+import {PaymentResolver} from "./resolvers/payment.resolver";
 
 
 
@@ -67,12 +68,12 @@ import { ActivitesByCityComponent } from './activites-by-city/activites-by-city.
     HttpClientModule,
     CommonModule,
       FormsModule,
-      MatSlideToggleModule,
-      SlickCarouselModule
+      MatSlideToggleModule
 
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    PaymentResolver
   ],
   bootstrap: [AppComponent]
 })
