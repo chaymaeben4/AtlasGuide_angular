@@ -1,5 +1,5 @@
 import {Resolve, ResolveFn} from '@angular/router';
-import {PaymentService} from "../../service/payment/payment.service";
+import {PaymentService} from "../../../service/payment/payment.service";
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 

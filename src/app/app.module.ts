@@ -33,7 +33,7 @@ import {TopActivitiesComponent} from "./home/top-activities/top-activities.compo
 import {CartComponent} from "./Paiement_process/cart_wishlist/cart/cart.component";
 // import {SlickCarouselModule} from "ngx-slick-carousel";
 import { ActivitesByCityComponent } from './activites-by-city/activites-by-city.component';
-import {PaymentResolver} from "./resolvers/payment.resolver";
+import {PaymentResolver} from "./resolvers/payment/payment.resolver";
 
 
 

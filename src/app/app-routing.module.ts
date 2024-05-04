@@ -10,7 +10,7 @@ import {WishlistComponent} from "./Paiement_process/cart_wishlist/wishlist/wishl
 import {ActivityDetailsComponent} from "./activity-details/activity-details.component";
 import {ActivitesByCityComponent} from "./activites-by-city/activites-by-city.component";
 import {resolve} from "@angular/compiler-cli";
-import {PaymentResolver} from "./resolvers/payment.resolver";
+import {PaymentResolver} from "./resolvers/payment/payment.resolver";
 
 const routes: Routes = [
   {path:'' , component : HomeComponent},
