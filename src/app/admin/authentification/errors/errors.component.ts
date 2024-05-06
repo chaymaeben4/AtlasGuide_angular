@@ -12,7 +12,7 @@ export class ErrorsComponent implements OnInit{
               @Inject(MAT_DIALOG_DATA) public data: any,) {}
 
   ngOnInit() {
-    console.log(this.data.value)
+    console.log(this.data.message);
   }
 
   onCancel(): void {

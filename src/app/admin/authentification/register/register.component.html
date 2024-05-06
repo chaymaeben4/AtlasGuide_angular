@@ -1,121 +1,91 @@
-<!--
-<div class="position-relative">
-
-  <div class="authentication-wrapper authentication-basic container-p-y">
-    <div [hidden]="!errorMessage" class="alert alert-warning" style="width: 50%;margin-left: 25%;margin-top: 3%;">
-      <h5 class="alert-heading mb-1">{{errorMessage}} !!</h5>
-    </div>
-    <div class="authentication-inner py-4">
-
-      <div class="card p-2">
-
-        <div class="app-brand justify-content-center mt-5">
-          <div style="display: block;">
-            <a href="index.html" class="app-brand-link gap-2">
-                <span class="app-brand-logo demo">
-                  <span style="color: #9055fd">
-                    <img src="./assets/img/Nouveau_projet-ai-brush-removebg-0dyusvph.png" style="width: 40px;"/>
-                  </span>
-                </span>
-              <span class="app-brand-text demo text-heading fw-semibold">CSEC</span>
-            </a>
-            <h4 class="mb-2" > Login to your account</h4>
-          </div>
-        </div>
-
-        <div class="card-body mt-2">
-
-          <form [formGroup]="addForm" (ngSubmit)="login(email.value,password.value)" id="formAuthentication" class="mb-3" >
-            <div class="form-floating form-floating-outline mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="email"
-                #email
-                name="email"
-                placeholder="Enter your email"
-                autofocus />
-              <label>Email</label>
-            </div>
-            <div class="form-floating form-floating-outline mb-3">
-              <input
-                type="text"
-                class="form-control"
-                id="password"
-                #password
-                name="password"
-                placeholder="Enter your password"
-                autofocus />
-              <label>Email</label>
-            </div>
-            <button type="submit" class="btn btn-primary d-grid w-100">Login</button>
-          </form>
-          <div class="text-center">
-            <a routerLink="/resetPassword" class="d-flex align-items-center justify-content-center">
-              Reset Password!
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
--->
-
 <div class="login-page darken-background" style="background-image: url(assets/images/admin_background.jpg);">
-
   <div class="login-from-wrap">
     <h1 class="site-title">
-      <a>
+      <a routerLink="/">
         <img src="assets/images/logo_app.png" alt="">
       </a>
     </h1>
 
-    <form   id="formAuthentication" class="mb-3 login-from" >
+    <form id="formAuthentication" class="mb-3 login-from" [formGroup]="registrationForm" (ngSubmit)="register()">
       <div class="form-floating form-floating-outline mb-3 form-group">
         <input
           type="text"
           class="form-control"
           id="name"
-          #name
-          name="name"
-          placeholder="Your Entreprise Name"
-          autofocus />
-        <label>Entreprise Name</label>
+          formControlName="name"
+          placeholder="Your Enterprise Name"
+          autofocus
+          required
+        />
+        <label>Enterprise Name</label>
+        <div *ngIf="formSubmitted && registrationForm.get('name')?.errors?.['required']" class="text-danger error-message">Enterprise name is required</div>
       </div>
       <div class="form-floating form-floating-outline mb-3 form-group">
         <input
           type="email"
           class="form-control"
           id="email"
-          #email
-          name="email"
+          formControlName="email"
           placeholder="Enter your email"
-          autofocus />
+          autofocus
+          required
+        />
         <label>Email</label>
+        <div *ngIf="formSubmitted && registrationForm.get('email')?.errors?.['required']" class="text-danger error-message">Email is required</div>
+        <div *ngIf="formSubmitted && registrationForm.get('email')?.errors?.['email']" class="text-danger error-message">Invalid email format</div>
       </div>
 
+      <div class="form-floating form-floating-outline mb-3 form-group">
+          <input
+            type="{{ showPassword ? 'text' : 'password' }}"
+            class="form-control"
+            id="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            autofocus
+            required
+          />
+          <button style="background: none;border: none;font-size: smaller;right: 2%;top: 35%;position: absolute;"  type="button" (click)="togglePasswordVisibility()">
+            <span class="fa" [ngClass]="{ 'fa-eye': !showPassword, 'fa-eye-slash': showPassword }"></span>
+          </button>
+        <label>Password</label>
+        <div *ngIf="formSubmitted && registrationForm.get('password')?.errors">
+          <div *ngIf="registrationForm.get('password')?.errors?.['minLengthNotMet']" class="text-danger error-message">Password must have at least 8 characters</div>
+          <div *ngIf="registrationForm.get('password')?.errors?.['maxLengthExceeded']" class="text-danger error-message">Password can have at most 16 characters</div>
+          <div *ngIf="registrationForm.get('password')?.errors?.['passwordInvalid']" class="text-danger error-message">Password must contains letters,numbers and characters (!,*,?,...)</div>
+        </div>
+      </div>
       <div class="form-floating form-floating-outline mb-3 form-group">
         <input
           type="password"
           class="form-control"
-          id="password"
-          #password
-          name="password"
-          placeholder="Enter your password"
-          autofocus />
-        <label>Password</label>
+          id="PasswordConfirmation"
+          formControlName="PasswordConfirmation"
+          placeholder="Confirm Password"
+          required />
+        <button style="background: none;border: none;font-size: smaller;right: 2%;top: 35%;position: absolute;"  type="button" (click)="togglePasswordVisibility()">
+          <span class="fa" [ngClass]="{ 'fa-eye': !showPassword, 'fa-eye-slash': showPassword }"></span>
+        </button>
+        <label>Confirm Password</label>
+        <div *ngIf="formSubmitted && registrationForm.get('newPassword')?.errors">
+          <div *ngIf="registrationForm.get('PasswordConfirmation')?.errors?.['minLengthNotMet']" class="text-danger error-message">Password must have at least 8 characters</div>
+          <div *ngIf="registrationForm.get('PasswordConfirmation')?.errors?.['maxLengthExceeded']" class="text-danger error-message">Password can have at most 16 characters</div>
+          <div *ngIf="registrationForm.get('PasswordConfirmation')?.errors?.['passwordInvalid']" class="text-danger error-message">Password must contains letters,numbers and characters (!,*,?,...)</div>
+        </div>
       </div>
+
       <div class="form-floating form-floating-outline mb-3 form-group">
         <input
           type="number"
           class="form-control"
           id="phone"
-          #phone
-          name="phone"
+          formControlName="phone"
           placeholder="Enter your phone number"
-          autofocus />
+          autofocus
+          required
+        />
         <label>Phone Number</label>
+        <div *ngIf="formSubmitted && registrationForm.get('phone')?.errors?.['required']" class="text-danger error-message">Phone number is required</div>
       </div>
 
       <div class="form-floating form-floating-outline mb-3 form-group">
@@ -123,11 +93,13 @@
           type="text"
           class="form-control"
           id="location"
-          #location
-          name="location"
-          placeholder="Entreprise Location"
-          autofocus />
+          formControlName="location"
+          placeholder="Enterprise Location"
+          autofocus
+          required
+        />
         <label>Location</label>
+        <div *ngIf="formSubmitted && registrationForm.get('location')?.errors?.['required']" class="text-danger error-message">Location is required</div>
       </div>
 
       <div class="form-group">
@@ -143,13 +115,6 @@
           Login
         </a>
       </div>
-
     </form>
   </div>
 </div>
-
-<!--
-<div>
-  <button (click)="register(name.value, email.value,location.value,phone.value,password.value)">Create</button>
-</div>
--->

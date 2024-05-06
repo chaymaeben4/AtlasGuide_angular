@@ -2125,3 +2125,8 @@ login form css
 .sign_up:hover{
   color: #F56960;
 }
+
+
+.error-message {
+  font-size: 12px;
+}

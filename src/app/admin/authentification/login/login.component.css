@@ -1,0 +1,22 @@
+.custom-error-popup {
+  background-color: red;
+  color: white;
+
+}
+
+
+.custom-error-title {
+  color: white;
+}
+
+.custom-error-content {
+  color: white;
+}
+
+.custom-error-button {
+  background-color: red;
+  color: white;
+}
+.error-message {
+  font-size: 12px;
+}

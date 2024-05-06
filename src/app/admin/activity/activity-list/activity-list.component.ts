@@ -4,66 +4,62 @@ import {Activity} from "../../../models/Activity";
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {ActivityService} from "../activity.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import { MatDialog } from '@angular/material/dialog';
+import {ActivatedRoute} from "@angular/router";
+import {MatDialog} from '@angular/material/dialog';
 import {ActivityUpdateComponent} from "../activity-update/activity-update.component";
 import {DeleteConfirmationDialogComponent} from "../delete-confirmation-dialog/delete-confirmation-dialog.component";
-import {SessionService} from "../../session.service";
+import {AuthentificationService} from "../../authentification/authentification.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-activity-list',
   templateUrl: './activity-list.component.html',
-  styleUrls: ['../../../../style_admin.css']
+  styleUrls: ['./activity-list.component.css']
 })
 export class ActivityListComponent implements OnInit{
 
   status = '';
 
-  selectedActivity: Activity | undefined;
+
   activities = new MatTableDataSource<Activity>([]);
   activities$: Activity[] = [];
-
-
+  formatDateString(dateString: string, currentFormat: string, desiredFormat: string): string {
+    const dateObject = new Date(dateString);
+    const formattedDate = this.datePipe.transform(dateObject, desiredFormat);
+    return <string>formattedDate;
+  }
+  rowStyles: string[] = ['t','table-light'];
+  rowIcon: string[] = ["mdi mdi-waveform mdi-20px text-success me-3","mdi mdi-checkbox-marked-circle-plus-outline mdi-20px text-danger me-3"]
   @ViewChild(MatSort) sort: MatSort | null = null;
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
+
   constructor(private activityService: ActivityService,
+              private AuthenticatinService: AuthentificationService,
               private route: ActivatedRoute,
               private dialog: MatDialog,
-              private sessionService: SessionService,
-              private router: Router) {}
+              private datePipe: DatePipe,) {}
 
   ngOnInit(): void {
+    this.activities = new MatTableDataSource(this.activityService.connect());
     this.getActivities();
     const queryParams = this.route.snapshot.queryParams;
     this.status = queryParams['status'];
-
-    const user = this.sessionService.getSessionData('user');
-    if (!user){
-      this.router.navigate(["/admin"])
-    }
+    this.AuthenticatinService.isAuthenticated()
   }
+
+
 
   private getActivities() {
     this.activityService.getActivities().subscribe(activities => {
       this.activities = new MatTableDataSource(activities);
+      console.log(this.activities)
       this.activities$ = activities;
       this.activities.sort = this.sort;
       this.activities.paginator = this.paginator;
     });
   }
 
-
-
-  isDatePassed(date: Date): boolean {
-    const queryParams = this.route.snapshot.queryParams;
-    this.status = queryParams['status'];
-    if (this.status === 'Active') {
-      return date && new Date(date) < new Date();
-    }else {
-      return date && new Date(date) > new Date();
-    }
-  }
 
   openDeleteConfirmationDialog(id: number): void {
     const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
@@ -100,4 +96,8 @@ export class ActivityListComponent implements OnInit{
       // Optionally, you can perform any action after the dialog is closed
     });
 }
+ generateRandomBinaryDigit() {
+    return Math.round(Math.random());
+  }
+
 }

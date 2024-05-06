@@ -89,6 +89,8 @@ import {YouTubePlayerModule} from "@angular/youtube-player";
     MatGridListModule,
 
   ],
-  exports: [],
+    exports: [
+        ActivityCreateComponent
+    ],
 })
 export class ActivityModule { }

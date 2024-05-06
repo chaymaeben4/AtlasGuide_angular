@@ -10,13 +10,12 @@ import {MatButtonModule} from "@angular/material/button";
 
 
 
-
 @NgModule({
     declarations: [
         LoginComponent,
         RegisterComponent,
         ResetPasswordComponent,
-        ErrorsComponent
+        ErrorsComponent,
     ],
     exports: [
         RegisterComponent,

@@ -378,7 +378,6 @@ tr,
 td,
 th {
   border-color: inherit;
-  border-style: solid;
   border-width: 0;
 }
 
@@ -1810,7 +1809,7 @@ progress {
   width: 100%;
   margin-bottom: 1rem;
   vertical-align: middle;
-  border-color: var(--bs-table-border-color);
+  border-color: transparent;
 }
 .table > :not(caption) > * > * {
   padding: 0.6rem 1.25rem;
@@ -3937,6 +3936,7 @@ textarea.form-control-lg {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  max-width: 100%;
   height: var(--bs-card-height);
   color: var(--bs-body-color);
   word-wrap: break-word;

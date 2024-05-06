@@ -7,7 +7,7 @@ import {map, Observable} from "rxjs";
 import {Time} from "@angular/common";
 import {SessionService} from "../../session.service";
 import {Router} from "@angular/router";
-
+import {AuthentificationService} from "../../authentification/authentification.service";
 @Component({
   selector: 'app-activity-create',
   templateUrl: './activity-create.component.html',
@@ -19,7 +19,7 @@ export class ActivityCreateComponent implements OnInit{
 
   filename = "";
   constructor(private activityService: ActivityService,
-              private sessionService: SessionService,
+              private AuthenticatinService: AuthentificationService,
               private router: Router) {
   }
 
@@ -42,11 +42,10 @@ export class ActivityCreateComponent implements OnInit{
     }),
     startedduration: new FormControl<Time | any>(undefined,{
       nonNullable: true,
-      validators: Validators.required
     }),
     finishedduration: new FormControl<Time | any>(undefined, {
       nonNullable: true,
-      validators: Validators.required
+
     }),
     price: new FormControl<number | undefined>(undefined, {
       nonNullable: true,
@@ -68,6 +67,7 @@ export class ActivityCreateComponent implements OnInit{
       nonNullable: true,
       validators: Validators.required
     }),
+    activityType: new FormControl ('year-round')
   });
 
   showPriceRangeHint = false;
@@ -95,10 +95,7 @@ export class ActivityCreateComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const user = this.sessionService.getSessionData('user');
-    if (!user){
-      this.router.navigate(["/admin"])
-    }
+    this.AuthenticatinService.isAuthenticated()
     this.price.valueChanges.subscribe(price => {
       if (price) {
         this.showPriceRangeHint = price > 1 && price < 10000;
@@ -118,10 +115,8 @@ export class ActivityCreateComponent implements OnInit{
       id: 1,
       designation: this.designation.value,
       description: this.description.value,
-      starteddate: this.starteddate.value,
-      finisheddate: this.finisheddate.value,
-      startedduration: this.startedduration.value,
-      finishedduration: this.finishedduration.value,
+      startDate: this.starteddate.value,
+      endDate: this.finisheddate.value,
       price: Number(this.price.value),
       category: this.err.at(0),
       descriptiondetail: this.descriptiondetail.value,

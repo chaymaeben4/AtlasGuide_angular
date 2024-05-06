@@ -130,21 +130,27 @@
   </div>
 </div>
 
-<div [hidden]="!this.session.getSessionData('user')"  class="dashboard-navigation">
+<div [hidden]="!session.getSessionData('user')" class="dashboard-navigation">
   <!-- Responsive Navigation Trigger -->
   <div id="dashboard-Navigation" class="slick-nav"></div>
   <div id="navigation" class="navigation-container">
     <ul>
       <li class="active-menu"><a routerLink="/dashboard"><i class="far fa-chart-bar"></i> Dashboard</a></li>
       <li><a routerLink="/createActivity"><i class="fas fa-umbrella-beach"></i>Add Activity</a></li>
-      <li><a ><i class="fas fa-hotel"></i>Activities</a></li>
-      <li>
-        <ul>
+      <li (click)="onActivitiesClick()"  >
+        <a routerLink="/activities">
+          <i class="fas fa-hotel"></i>
+          Activities
+          <span [hidden]="isActivitiesClicked" style="float: right;font-size: 20px;">+</span>
+          <span [hidden]="!isActivitiesClicked" style="float: right;font-size: 25px;">-</span>
+        </a>
+        <ul class="sub-menu" [hidden]="!isActivitiesClicked">
           <li><a routerLink="/activities" [queryParams]="{status: 'All'}">All</a></li>
           <li><a routerLink="/activities" [queryParams]="{status: 'Active'}">Active</a></li>
           <li><a routerLink="/activities" [queryParams]="{status: 'Expired'}">Expired</a></li>
         </ul>
       </li>
+
       <li><a href="db-booking.html"><i class="fas fa-ticket-alt"></i> Booking & Enquiry</a></li>
       <li><a routerLink="/wishlist" ><i class="far fa-heart"></i>Wishlist</a></li>
       <li><a routerLink="/comments" ><i class="fas fa-comments"></i>Comments </a><span  class="notify1" >3</span>

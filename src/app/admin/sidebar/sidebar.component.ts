@@ -11,7 +11,11 @@ export class SidebarComponent implements OnInit {
 
   constructor(public session: SessionService,
               private router: Router,) {}
+  isActivitiesClicked: boolean = false;
 
+  onActivitiesClick() {
+    this.isActivitiesClicked = !this.isActivitiesClicked;
+  }
   ngOnInit() {
 
   }

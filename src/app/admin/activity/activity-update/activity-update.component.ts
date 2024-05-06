@@ -8,6 +8,7 @@ import {priceRangeValidator} from "../../products/price-range.directive";
 import {map, Observable} from "rxjs";
 import {Router} from "@angular/router";
 import {SessionService} from "../../session.service";
+import {AuthentificationService} from "../../authentification/authentification.service";
 
 
 @Component({
@@ -27,8 +28,7 @@ export class ActivityUpdateComponent {
     public dialogRef: MatDialogRef<ActivityUpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private activityService: ActivityService,
-    private sessionService: SessionService,
-    private router: Router
+    private AuthenticationService: AuthentificationService,
   ) { }
 
   ngOnChanges(): void {
@@ -59,19 +59,11 @@ export class ActivityUpdateComponent {
       nonNullable: true,
       validators: Validators.required
     }),
-    starteddate: new FormControl<Date | any  >( undefined,{
+    startDate: new FormControl<Date | any  >( undefined,{
       nonNullable: true,
       validators: Validators.required
     }),
-    finisheddate: new FormControl<Date | any>(undefined, {
-      nonNullable: true,
-      validators: Validators.required
-    }),
-    startedduration: new FormControl<Time | any>(undefined,{
-      nonNullable: true,
-      validators: Validators.required
-    }),
-    finishedduration: new FormControl<Time | any>(undefined, {
+    endDate: new FormControl<Date | any>(undefined, {
       nonNullable: true,
       validators: Validators.required
     }),
@@ -108,10 +100,8 @@ export class ActivityUpdateComponent {
   get designation() { return this.activityForm.controls.designation }
   get description() { return this.activityForm.controls.description }
   get descriptiondetail() { return this.activityForm.controls.descriptiondetail }
-  get startedduration() { return this.activityForm.controls.startedduration }
-  get finishedduration() { return this.activityForm.controls.finishedduration }
-  get starteddate() { return this.activityForm.controls.starteddate }
-  get finisheddate() { return this.activityForm.controls.finisheddate }
+  get startDate() { return this.activityForm.controls.startDate }
+  get endDate() { return this.activityForm.controls.endDate}
   get category() { return this.activityForm.controls.category }
   get price() { return this.activityForm.controls.price }
   get location() { return this.activityForm.controls.location }
@@ -123,11 +113,9 @@ export class ActivityUpdateComponent {
   }
 
   ngOnInit(): void {
-    const user = this.sessionService.getSessionData('user');
-    if (!user){
-      this.router.navigate(["/admin"])
-    }
+    this.AuthenticationService.isAuthenticated()
     this.activity$ = this.activityService.getActivity(this.data.id)
+    console.log(this.activity$)
     this.activity$.subscribe(activity => {
       this.activityForm.patchValue(activity);
       this.filename = activity.imageUrl;
@@ -155,10 +143,8 @@ export class ActivityUpdateComponent {
       id: this.data.id,
       designation: this.designation.value,
       description: this.description.value,
-      starteddate: this.starteddate.value,
-      finisheddate: this.finisheddate.value,
-      startedduration: this.startedduration.value,
-      finishedduration: this.finishedduration.value,
+      startDate: this.startDate.value,
+      endDate: this.endDate.value,
       price: Number(this.price.value),
       category: this.err.at(0),
       descriptiondetail: this.descriptiondetail.value,

@@ -30,37 +30,40 @@ import {SlickCarouselModule} from "ngx-slick-carousel";
 
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    SliderComponent,
-    TopActivitiesComponent,
-    HeaderComponent,
-    FooterComponent,
-    FamousPlacesComponent,
-    LoginComponent,
-    SignUpComponent,
-    CartComponent,
-    PaiementFormComponent,
-    PaiementConfirmationComponent,
-    WishlistComponent,
-    CitiesComponent,
-    CallbackComponent,
-    TestimonialComponent,
-    ActivityDetailsComponent,
-    BodyDetailsComponent,
-    DetailsHeaderComponent
-  ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    MatSlideToggleModule,
-    SlickCarouselModule
-  ],
-  providers: [
-    provideAnimationsAsync()
-  ],
+    declarations: [
+        HomeComponent,
+        SliderComponent,
+        TopActivitiesComponent,
+        HeaderComponent,
+        FooterComponent,
+        FamousPlacesComponent,
+        LoginComponent,
+        SignUpComponent,
+        CartComponent,
+        PaiementFormComponent,
+        PaiementConfirmationComponent,
+        WishlistComponent,
+        CitiesComponent,
+        CallbackComponent,
+        TestimonialComponent,
+        ActivityDetailsComponent,
+        BodyDetailsComponent,
+        DetailsHeaderComponent
+    ],
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        MatSlideToggleModule,
+        SlickCarouselModule
+    ],
+    providers: [
+        provideAnimationsAsync()
+    ],
+    exports: [
+        FooterComponent
+    ]
 })
 export class UserModule { }

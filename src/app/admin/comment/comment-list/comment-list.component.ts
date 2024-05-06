@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommentService} from "../comment.service";
 import {Comment} from "../../../models/Comment";
-import {SessionService} from "../../session.service";
-import {Router} from "@angular/router";
+import {AuthentificationService} from "../../authentification/authentification.service";
 
 @Component({
   selector: 'app-comment-list',
@@ -14,15 +13,11 @@ export class CommentListComponent implements OnInit{
   comments!: Comment[];
 
   constructor(private commentService: CommentService,
-              private sessionService: SessionService,
-              private router: Router) {}
+              private AauthService: AuthentificationService) {}
 
   ngOnInit(): void {
     this.getComments();
-    const user = this.sessionService.getSessionData('user');
-    if (!user){
-      this.router.navigate(["/admin"])
-    }
+    this.AauthService.isAuthenticated()
   }
 
   private getComments() {

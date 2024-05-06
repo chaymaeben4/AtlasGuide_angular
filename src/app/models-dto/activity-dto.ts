@@ -4,10 +4,8 @@ import {ActivityCategories} from "../admin/enumerations/activity-categories";
 export interface ActivityDto {
   id: number,
   designation: string,
-  starteddate: Date,
-  finisheddate: Date,
-  startedduration: Time,
-  finishedduration: Time,
+  startDate: Date,
+  endDate: Date,
   description: string,
   descriptiondetail: string,
   price: number,

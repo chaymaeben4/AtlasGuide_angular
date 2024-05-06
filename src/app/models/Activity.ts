@@ -3,10 +3,8 @@ import {Time} from "@angular/common";
 export interface Activity {
   id: number,
   designation: string,
-  starteddate: Date,
-  finisheddate: Date,
-  startedduration: Time,
-  finishedduration: Time,
+  startDate: Date,
+  endDate: Date,
   description: string,
   descriptiondetail: string,
   price: number,
