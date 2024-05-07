@@ -6,7 +6,7 @@
       </a>
     </h1>
 
-    <form id="formAuthentication" class="mb-3 login-from" [formGroup]="registrationForm" (ngSubmit)="register()">
+    <form id="formAuthentication" class="mb-3 login-from" [formGroup]="form.registrationForm" (ngSubmit)="register()">
       <div class="form-floating form-floating-outline mb-3 form-group">
         <input
           type="text"
@@ -18,7 +18,7 @@
           required
         />
         <label>Enterprise Name</label>
-        <div *ngIf="formSubmitted && registrationForm.get('name')?.errors?.['required']" class="text-danger error-message">Enterprise name is required</div>
+        <div *ngIf="formSubmitted && form.registrationForm.get('name')?.errors?.['required']" class="text-danger error-message">Enterprise name is required</div>
       </div>
       <div class="form-floating form-floating-outline mb-3 form-group">
         <input
@@ -31,8 +31,8 @@
           required
         />
         <label>Email</label>
-        <div *ngIf="formSubmitted && registrationForm.get('email')?.errors?.['required']" class="text-danger error-message">Email is required</div>
-        <div *ngIf="formSubmitted && registrationForm.get('email')?.errors?.['email']" class="text-danger error-message">Invalid email format</div>
+        <div *ngIf="formSubmitted && form.registrationForm.get('email')?.errors?.['required']" class="text-danger error-message">Email is required</div>
+        <div *ngIf="formSubmitted && form.registrationForm.get('email')?.errors?.['email']" class="text-danger error-message">Invalid email format</div>
       </div>
 
       <div class="form-floating form-floating-outline mb-3 form-group">
@@ -49,10 +49,10 @@
             <span class="fa" [ngClass]="{ 'fa-eye': !showPassword, 'fa-eye-slash': showPassword }"></span>
           </button>
         <label>Password</label>
-        <div *ngIf="formSubmitted && registrationForm.get('password')?.errors">
-          <div *ngIf="registrationForm.get('password')?.errors?.['minLengthNotMet']" class="text-danger error-message">Password must have at least 8 characters</div>
-          <div *ngIf="registrationForm.get('password')?.errors?.['maxLengthExceeded']" class="text-danger error-message">Password can have at most 16 characters</div>
-          <div *ngIf="registrationForm.get('password')?.errors?.['passwordInvalid']" class="text-danger error-message">Password must contains letters,numbers and characters (!,*,?,...)</div>
+        <div *ngIf="form.registrationForm.get('password')?.errors">
+          <div *ngIf="form.registrationForm.get('password')?.errors?.['minLengthNotMet']" class="text-danger error-message">Password must have at least 8 characters</div>
+          <div *ngIf="form.registrationForm.get('password')?.errors?.['maxLengthExceeded']" class="text-danger error-message">Password can have at most 16 characters</div>
+          <div *ngIf="form.registrationForm.get('password')?.errors?.['passwordInvalid']" class="text-danger error-message">Password must contains letters,numbers and characters (!,*,?,...)</div>
         </div>
       </div>
       <div class="form-floating form-floating-outline mb-3 form-group">
@@ -67,10 +67,10 @@
           <span class="fa" [ngClass]="{ 'fa-eye': !showPassword, 'fa-eye-slash': showPassword }"></span>
         </button>
         <label>Confirm Password</label>
-        <div *ngIf="formSubmitted && registrationForm.get('newPassword')?.errors">
-          <div *ngIf="registrationForm.get('PasswordConfirmation')?.errors?.['minLengthNotMet']" class="text-danger error-message">Password must have at least 8 characters</div>
-          <div *ngIf="registrationForm.get('PasswordConfirmation')?.errors?.['maxLengthExceeded']" class="text-danger error-message">Password can have at most 16 characters</div>
-          <div *ngIf="registrationForm.get('PasswordConfirmation')?.errors?.['passwordInvalid']" class="text-danger error-message">Password must contains letters,numbers and characters (!,*,?,...)</div>
+        <div *ngIf="form.registrationForm.get('newPassword')?.errors">
+          <div *ngIf="form.passwordConfirmation.get('PasswordConfirmation')?.errors?.['minLengthNotMet']" class="text-danger error-message">Password must have at least 8 characters</div>
+          <div *ngIf="form.passwordConfirmation.get('PasswordConfirmation')?.errors?.['maxLengthExceeded']" class="text-danger error-message">Password can have at most 16 characters</div>
+          <div *ngIf="form.passwordConfirmation.get('PasswordConfirmation')?.errors?.['passwordInvalid']" class="text-danger error-message">Password must contains letters,numbers and characters (!,*,?,...)</div>
         </div>
       </div>
 
@@ -85,7 +85,7 @@
           required
         />
         <label>Phone Number</label>
-        <div *ngIf="formSubmitted && registrationForm.get('phone')?.errors?.['required']" class="text-danger error-message">Phone number is required</div>
+        <div *ngIf="formSubmitted && form.registrationForm.get('phone')?.errors?.['required']" class="text-danger error-message">Phone number is required</div>
       </div>
 
       <div class="form-floating form-floating-outline mb-3 form-group">
@@ -99,7 +99,7 @@
           required
         />
         <label>Location</label>
-        <div *ngIf="formSubmitted && registrationForm.get('location')?.errors?.['required']" class="text-danger error-message">Location is required</div>
+        <div *ngIf="formSubmitted && form.registrationForm.get('location')?.errors?.['required']" class="text-danger error-message">Location is required</div>
       </div>
 
       <div class="form-group">

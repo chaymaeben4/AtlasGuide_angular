@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthentificationService} from "../authentification.service";
 import Swal, {SweetAlertOptions} from 'sweetalert2';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {passwordValidator} from "../passwordValidator/password-validator";
+import {FormComponent} from "../../form/form.component";
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
@@ -12,7 +11,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class RegisterComponent implements OnInit{
 
-  registrationForm!: FormGroup;
   formSubmitted = false;
   showPassword: boolean = false;
 
@@ -21,20 +19,12 @@ export class RegisterComponent implements OnInit{
   }
 
   constructor(private authService: AuthentificationService,
-              private formBuilder: FormBuilder,
               private router: Router,
-              private route: ActivatedRoute,) {
+              private route: ActivatedRoute,
+              protected form: FormComponent) {
   }
 
   ngOnInit() {
-    this.registrationForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required,passwordValidator]],
-      PasswordConfirmation: ['',[Validators.required,passwordValidator]],
-      phone: ['', Validators.required],
-      location: ['', Validators.required]
-    });
     const queryParams = this.route.snapshot.queryParams;
     this.authService.verifyAccount(queryParams['token']).subscribe(
       messages => {
@@ -54,9 +44,9 @@ export class RegisterComponent implements OnInit{
     setTimeout(() => {
       this.formSubmitted = false;
     },6000)
-    if (this.registrationForm.valid) {
+    if (this.form.registrationForm.valid) {
       console.log("valide")
-      this.authService.register(this.registrationForm.value).subscribe(
+      this.authService.register(this.form.registrationForm.value).subscribe(
         messages => {
           console.log(JSON.stringify(messages));
         },

@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthentificationService} from "../../authentification/authentification.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {passwordValidator} from "../../authentification/passwordValidator/password-validator";
 import {SessionService} from "../../session.service";
 import {Agence} from "../../../models/Agence";
-import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-account',
@@ -59,7 +57,6 @@ export class AccountComponent implements OnInit{
     );
   }
   updateData(){
-
     this.authService.updateData(this.updateForm.value,this.agence.id).subscribe(
       messages => {
         console.log(JSON.stringify(messages));
