@@ -60,4 +60,6 @@ export class CallbackComponent implements OnInit{
       this.nombreActuelActivites >= this.nombreTotalActivites;
   }
 
+
+
 }
