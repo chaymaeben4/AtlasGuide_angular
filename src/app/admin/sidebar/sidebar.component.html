@@ -1,8 +1,8 @@
-<div [hidden]="!this.session.getSessionData('user')"  class="dashboard-header sticky-header">
+<div  [hidden]="!this.filterService.roleFilter('ROLE_CONTENT_MANAGER')"  class="dashboard-header sticky-header">
   <div class="content-left  logo-section pull-left">
     <h1>
       <a routerLink="/dashboard">
-        <img style="width: 50px;" src="/assets/img/morocco/morocco_4482872.png" alt="">
+
         CityThrillsMorocco
       </a>
     </h1>
@@ -130,35 +130,64 @@
   </div>
 </div>
 
-<div [hidden]="!session.getSessionData('user')" class="dashboard-navigation">
-  <!-- Responsive Navigation Trigger -->
-  <div id="dashboard-Navigation" class="slick-nav"></div>
-  <div id="navigation" class="navigation-container">
-    <ul>
-      <li class="active-menu"><a routerLink="/dashboard"><i class="far fa-chart-bar"></i> Dashboard</a></li>
-      <li><a routerLink="/createActivity"><i class="fas fa-umbrella-beach"></i>Add Activity</a></li>
-      <li (click)="onActivitiesClick()"  >
-        <a routerLink="/activities">
-          <i class="fas fa-hotel"></i>
-          Activities
-          <span [hidden]="isActivitiesClicked" style="float: right;font-size: 20px;">+</span>
-          <span [hidden]="!isActivitiesClicked" style="float: right;font-size: 25px;">-</span>
-        </a>
-        <ul class="sub-menu" [hidden]="!isActivitiesClicked">
-          <li><a routerLink="/activities" [queryParams]="{status: 'All'}">All</a></li>
-          <li><a routerLink="/activities" [queryParams]="{status: 'Active'}">Active</a></li>
-          <li><a routerLink="/activities" [queryParams]="{status: 'Expired'}">Expired</a></li>
-        </ul>
-      </li>
+<div [hidden]="!this.filterService.roleFilter('ROLE_CONTENT_MANAGER')"  style="display: flex;">
+  <div   class="dashboard-navigation">
 
-      <li><a href="db-booking.html"><i class="fas fa-ticket-alt"></i> Booking & Enquiry</a></li>
-      <li><a routerLink="/wishlist" ><i class="far fa-heart"></i>Wishlist</a></li>
-      <li><a routerLink="/comments" ><i class="fas fa-comments"></i>Comments </a><span  class="notify1" >3</span>
-      </li>
-      <li><a (click)="logout()" href=""><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-    </ul>
+    <!-- Responsive Navigation Trigger -->
+    <div id="dashboard-Navigation" class="slick-nav"></div>
+    <div id="navigation" class="navigation-container" >
+      <ul>
+        <li>
+          <span [hidden]="hid1" (click)="hide();"
+                style="
+          display: flex;
+          position: absolute;
+          right: 1%;
+          margin-top: 5%;
+          z-index: 99999999999999999;">
+            <img src="assets/img/closenve/next_7735582.png" style="width: 23px;height: 23px;" alt/>
+          </span>
+          <span [hidden]="hid2" (click)="hide();"
+                style="
+          display: flex;
+          position: absolute;
+          right: 1%;
+          margin-top: 5%;
+          z-index: 99999999999999999;">
+          <img src="assets/img/closenve/back-arrows_7735576.png" style="width: 23px;height:23px;"  alt/>
+        </span>
+        </li>
+
+      </ul>
+      <ul>
+        <li class="active-menu"><a routerLink="/dashboard">
+          <i class="far fa-chart-bar"></i>
+          Dashboard
+
+        </a></li>
+        <li><a routerLink="/createActivity"><i class="fas fa-umbrella-beach"></i>Add Activity</a></li>
+        <li (click)="onActivitiesClick()"  >
+          <a routerLink="/activities">
+            <i class="fas fa-hotel"></i>
+            Activities
+            <span [hidden]="isActivitiesClicked" style="float: right;font-size: 20px;">+</span>
+            <span [hidden]="!isActivitiesClicked" style="float: right;font-size: 25px;">-</span>
+          </a>
+        </li>
+
+        <li><a href="db-booking.html"><i class="fas fa-ticket-alt"></i> Booking & Enquiry</a></li>
+        <li><a routerLink="/wishlist" ><i class="far fa-heart"></i>Wishlist</a></li>
+        <li><a routerLink="/comments" ><i class="fas fa-comments"></i>Comments </a><span  class="notify1" >3</span>
+        </li>
+        <li><a (click)="navigator.logout()" href=""><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+      </ul>
+    </div>
+
   </div>
+
 </div>
+
+
 
 
 

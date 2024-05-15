@@ -1,2 +1,3 @@
-<app-sidebar/>
-<router-outlet />
+<app-sidebar [hidden]="!this.filterService.roleFilter('ROLE_CONTENT_MANAGER')" />
+<app-user-sidebar  [hidden]="!this.filterService.roleFilter('ROLE_USER')" />
+<router-outlet/>

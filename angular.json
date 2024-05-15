@@ -35,11 +35,13 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/swiper/swiper-bundle.min.css",
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css"
+              "node_modules/swiper/swiper-bundle.min.css",
+              "src/styles.css",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": [
+              "node_modules/leaflet/dist/leaflet.js",
               "node_modules/swiper/swiper-bundle.min.js"
             ]
           },

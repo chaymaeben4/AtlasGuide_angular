@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -415,13 +416,13 @@ img {
 # Heading
 --------------------------------------------------------------*/
 h1, h2, h3, h4, h5, h6 {
-  color: #101F46;
+  color: #083294;
   font-family: "Raleway", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 15px;
-  line-height: 1.2;
+  line-height: 1;
 }
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   color: inherit;
@@ -1548,9 +1549,9 @@ input[type=submit]:focus {
 /*Dashboard navigation
 ------------------------------------- */
 .dashboard-navigation {
-  background-image: linear-gradient(270deg, #4576a1 0%, #69b6ea 100%);
+  background-image: linear-gradient(270deg, #025093 0%, #189ffa 100%);
   float: left;
-  width: 17%;
+  width: 16%;
   height: 100%;
   padding-top: 75px;
   position: fixed;
@@ -1558,6 +1559,9 @@ input[type=submit]:focus {
   z-index: 99;
   overflow-y: auto;
   overflow-x: hidden;
+}
+.dashboard-navigation2 {
+  width: 0%;
 }
 @media screen and (min-width: 768px) {
   .dashboard-navigation #navigation {
@@ -1894,16 +1898,68 @@ input[type=submit]:focus {
   }
 }
 
+@keyframes slideIn1 {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-17%);
+  }
+}
+
+@keyframes slideOut1 {
+  from {
+    transform: translateX(-17%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-92%);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(-92%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease both;
+}
+.slide-out {
+  animation: slideOut 0.5s ease both;
+}
+
+.slide-in1 {
+  margin-left: -18%;
+}
+.slide-out1 {
+
+  width: 100%;
+}
+
+
 .db-info-wrap {
-  background: #e8edf2;
-  float: left;
-  width: 83%;
+  background: #eff5fc;
+  /*float: left;*/
+  width: 82%;
   padding: 60px 40px 40px;
   margin-left: 17%;
   margin-top: 60px;
 }
 .db-info-wrap1{
-  background: #074d99;
+  background: #b3d5f157;
   float: RIGHT;
   width: 100%;
   padding: 60px 40px 40px;
@@ -1911,8 +1967,8 @@ input[type=submit]:focus {
 }
 @media screen and (max-width: 991px) {
   .db-info-wrap {
-    width: 70%;
-    margin-left: 30%;
+    width: auto;
+    /*margin-left: 30%;*/
   }
 }
 @media screen and (max-width: 767px) {
@@ -2327,10 +2383,12 @@ input[type=submit]:focus {
 }
 @media screen and (max-width: 991px) {
   .navigation-container {
-    padding-right: 35px;
+
   }
 }
-
+.active-popup{
+  z-index: 9999999999;
+}
 .main-navigation .navigation > ul > li {
   display: inline-block;
   padding: 0 10px;
@@ -9572,6 +9630,9 @@ product checkout css
 }
 
 /*# sourceMappingURL=style.css.map */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

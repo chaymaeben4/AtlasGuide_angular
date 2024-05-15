@@ -13,3 +13,6 @@
 .a{
   background-color: rgba(0, 148, 246, 0.06);
 }
+.table-border-bottom-0 th{
+  background: #a5d5ff;
+}
