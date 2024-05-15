@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ActivityService} from "../../service/activity/activity.service";
-import {Activity} from "../../model/Activity.model";
-import {City} from "../../model/enumeration/City.enum";
+import {ActivityService} from "../../../service/activity/activity.service";
+import {City} from "../../../model/enumeration/City.enum";
+import {Activity} from "../../../model/Activity.model";
+
 
 @Component({
   selector: 'app-activites-by-city',

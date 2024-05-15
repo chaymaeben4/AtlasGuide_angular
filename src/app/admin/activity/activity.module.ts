@@ -6,7 +6,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatOptionModule} from '@angular/material/core';
+import {MatOptionModule, provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -35,7 +35,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {ClipboardModule} from "@angular/cdk/clipboard";
 import {GoogleMapsModule} from "@angular/google-maps";
 import {YouTubePlayerModule} from "@angular/youtube-player";
-
+import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
+import {MatStepperModule} from "@angular/material/stepper";
 
 
 @NgModule({
@@ -48,47 +49,50 @@ import {YouTubePlayerModule} from "@angular/youtube-player";
     ActivitiesComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [
-    ActivityRoutingModule,
-    CommonModule,
-    DragDropModule,
-    MatGridListModule,
-    MatListModule,
-    FormsModule,
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatOptionModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatTableModule,
-    RouterLink,
-    MatDialogModule,
-    MatButtonToggleModule,
-    NgOptimizedImage,
-    MatCardModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCheckboxModule,
+    imports: [
+        ActivityRoutingModule,
+        CommonModule,
+        DragDropModule,
+        MatGridListModule,
+        MatListModule,
+        FormsModule,
+        MatAutocompleteModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatOptionModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatTableModule,
+        RouterLink,
+        MatDialogModule,
+        MatButtonToggleModule,
+        NgOptimizedImage,
+        MatCardModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatCheckboxModule,
 
-    ReactiveFormsModule,
-    CommonModule,
-    MatToolbarModule,
-    ClipboardModule,
-    MatFormFieldModule,
-    FormsModule,
-    GoogleMapsModule,
-    YouTubePlayerModule,
-    MatGridListModule,
-
-  ],
+        ReactiveFormsModule,
+        CommonModule,
+        MatToolbarModule,
+        ClipboardModule,
+        MatFormFieldModule,
+        FormsModule,
+        GoogleMapsModule,
+        YouTubePlayerModule,
+        MatGridListModule,
+        MatRadioGroup,
+        MatRadioButton,
+        MatStepperModule,
+    ],
+  providers: [provideNativeDateAdapter()],
     exports: [
         ActivityCreateComponent
     ],

@@ -8,14 +8,11 @@ import {ActivityModule} from "./activity/activity.module";
 import {AdminRoutingModule} from "./admin-routing.module";
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {AuthentificationModule} from "./authentification/authentification.module";
-import { FormComponent } from './form/form.component';
 
 @NgModule({
   declarations: [
     DashbordComponent,
     SidebarComponent,
-    FormComponent,
-
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

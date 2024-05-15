@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthentificationService} from "../authentification.service";
-import Swal, {SweetAlertOptions} from 'sweetalert2';
-import {FormComponent} from "../../form/form.component";
+import {AlertsService} from "../../alerts/alerts.service";
 import {ActivatedRoute, Router} from "@angular/router";
-
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {passwordValidator} from "../passwordValidator/password-validator";
+import {FormsService} from "../../forms/forms.service";
+import {NavigatorService} from "../../../navigator/navigator.service";
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,15 +15,22 @@ export class RegisterComponent implements OnInit{
 
   formSubmitted = false;
   showPassword: boolean = false;
+  showPasswordconfirm = false;
+  role= true;
 
-  togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword;
-  }
+  registrationForm: FormGroup;
+  passwordConfirmation: FormGroup;
+
 
   constructor(private authService: AuthentificationService,
-              private router: Router,
+              private navigator: NavigatorService,
+              private alertService: AlertsService,
               private route: ActivatedRoute,
-              protected form: FormComponent) {
+              protected formBuilder: FormBuilder,
+              private form: FormsService,)
+  {
+    this.registrationForm = this.form.userForm;
+    this.passwordConfirmation = this.form.passwordConfirmation;
   }
 
   ngOnInit() {
@@ -30,13 +39,12 @@ export class RegisterComponent implements OnInit{
       messages => {
         console.log(JSON.stringify(messages));
       },
-      error => {
-        if (error.status===200){
-          this.router.navigate(['/Admin_login'],{ queryParams: { v: '1' } });
-        }
-      }
+      error => this.navigator.register_navigator(error.status)
     );
+  }
 
+  roleState(role: boolean){
+    this.role = role;
   }
 
   register() {
@@ -44,45 +52,16 @@ export class RegisterComponent implements OnInit{
     setTimeout(() => {
       this.formSubmitted = false;
     },6000)
-    if (this.form.registrationForm.valid) {
-      console.log("valide")
-      this.authService.register(this.form.registrationForm.value).subscribe(
+    if (this.registrationForm.valid) {
+      this.authService.register(this.registrationForm.value,this.role).subscribe(
         messages => {
           console.log(JSON.stringify(messages));
         },
-        error => {
-          if (error.status===200){
-            Swal.fire(this.succeed_swalOptions);
-          }
-          if (error.status === 400) {
-            Swal.fire(this.error_swalOptions);
-          }
-        }
+        error => this.alertService.registerAlert(error.status)
       );
     }
-
   }
 
-  error_swalOptions: SweetAlertOptions = {
-    text: 'Email is already in use! .',
-    position: 'top',
-    width: '400px',
-    showCloseButton: true,
-    showConfirmButton: false,
-    customClass: {
-      popup: 'alert alert-danger',
-    }
-  };
-
-  succeed_swalOptions: SweetAlertOptions = {
-    text: 'Confirm your Account by the link sent to your email address .',
-    position: 'top',
-    width: '400px',
-    showConfirmButton: true,
-    customClass: {
-      popup: 'alert alert-info',
-    }
-  };
 
 
 }

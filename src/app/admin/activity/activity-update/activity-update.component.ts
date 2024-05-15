@@ -2,13 +2,16 @@ import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Activity} from "../../../models/Activity";
 import {ActivityService} from "../activity.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Time} from "@angular/common";
-import {priceRangeValidator} from "../../products/price-range.directive";
 import {map, Observable} from "rxjs";
-import {Router} from "@angular/router";
-import {SessionService} from "../../session.service";
 import {AuthentificationService} from "../../authentification/authentification.service";
+import {FormsService} from "../../forms/forms.service";
+import {ActivityCategories} from "../../enumerations/activity-categories";
+import {City} from "../../../../model/enumeration/City.enum";
+import {SafeResourceUrl} from "@angular/platform-browser";
+import {GoogleMapsService} from "../../../maps/google-maps.service";
+import {FormGroup} from "@angular/forms";
+import {AlertsService} from "../../alerts/alerts.service";
+import {Route, Router} from "@angular/router";
 
 
 @Component({
@@ -17,102 +20,53 @@ import {AuthentificationService} from "../../authentification/authentification.s
   styleUrls: ['./activity-update.component.css']
 })
 export class ActivityUpdateComponent {
+  isLinear = false;
+  @Output() added = new EventEmitter<Activity>();
 
-  @Input() activity: Activity | undefined;
-  @Output() bought = new EventEmitter();
-  @Output() deleted = new EventEmitter();
-  @Input() id = -1;
+  cities: City[] = Object.values(City);
+  filteredCities!: Observable<City[]> | undefined;
+
+  filename = "";
+  unsafeUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14131401.081666416!2d-27.633198336256214!3d30.150012426714188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b88619651c58d%3A0xd9d39381c42cffc3!2sMaroc!5e0!3m2!1sfr!2sma!4v1715315794985!5m2!1sfr!2sma';
+  safeUrl: SafeResourceUrl = this.googleMapService.sanitizer.bypassSecurityTrustResourceUrl(this.unsafeUrl);
+
   activity$: Observable<Activity> | undefined;
+  activityForm!: FormGroup;
 
   constructor(
-    public dialogRef: MatDialogRef<ActivityUpdateComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private activityService: ActivityService,
     private AuthenticationService: AuthentificationService,
+    private form: FormsService,
+    private googleMapService: GoogleMapsService,
+    private rout: Router,
+    private alert: AlertsService,
   ) { }
 
-  ngOnChanges(): void {
-    this.activity$ = this.activityService.getActivity(this.id);
-  }
-
-  remove(activity: Activity) {
-    this.activityService.deleteActivity(activity.id).subscribe(() => {
-      this.deleted.emit();
-    });
-  }
-
-  onCancelClick(): void {
-    this.dialogRef.close();
-  }
-
-  @Output() added = new EventEmitter<Activity>();
-
-  filename = "";
 
 
-  activityForm = new FormGroup({
-    designation: new FormControl('', {
-      nonNullable: true,
-      validators: Validators.required
-    }),
-    description: new FormControl('', {
-      nonNullable: true,
-      validators: Validators.required
-    }),
-    startDate: new FormControl<Date | any  >( undefined,{
-      nonNullable: true,
-      validators: Validators.required
-    }),
-    endDate: new FormControl<Date | any>(undefined, {
-      nonNullable: true,
-      validators: Validators.required
-    }),
-    price: new FormControl<number | undefined>(undefined, {
-      nonNullable: true,
-      validators: [Validators.required, priceRangeValidator()]
-    }),
-    category: new FormControl<String | ''>('', {
-      nonNullable: true,
-      validators: Validators.required
-    }),
-    descriptiondetail:  new FormControl('', {
-      nonNullable: true,
-      validators: Validators.required
-    }),
-    location: new FormControl('', {
-      nonNullable: true,
-      validators: Validators.required
-    }),
-    imageUrl: new FormControl('', {
-      nonNullable: true,
-      validators: Validators.required
-    }),
-  });
 
-  showPriceRangeHint = false;
-  url!: string;
   activities: Activity[] = [];
   activities$: Observable<Activity[]> | undefined;
-  categories = ['Hardware', 'Computers', 'Clothing', 'Software'];
-
+  categories = Object.values(ActivityCategories);
+  showPriceRangeHint = false;
   err: string[] = [];
 
-  get designation() { return this.activityForm.controls.designation }
-  get description() { return this.activityForm.controls.description }
-  get descriptiondetail() { return this.activityForm.controls.descriptiondetail }
-  get startDate() { return this.activityForm.controls.startDate }
-  get endDate() { return this.activityForm.controls.endDate}
-  get category() { return this.activityForm.controls.category }
-  get price() { return this.activityForm.controls.price }
-  get location() { return this.activityForm.controls.location }
-  get imageUrl(){return this.activityForm.controls.imageUrl}
-
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    this.filename = file.name;
+  currentFile?: File;
+  progress = 0;
+  message = '';
+  fileName = 'Select File';
+  selectFile(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      const file: File = event.target.files[0];
+      this.currentFile = file;
+      this.fileName = this.currentFile.name;
+    } else {
+      this.fileName = 'Select File';
+    }
   }
-
   ngOnInit(): void {
+    this.activityForm = this.form.activityForm;
     this.AuthenticationService.isAuthenticated()
     this.activity$ = this.activityService.getActivity(this.data.id)
     console.log(this.activity$)
@@ -123,40 +77,53 @@ export class ActivityUpdateComponent {
     });
 
 
-    this.price.valueChanges.subscribe(price => {
+    this.activityForm.get('price')?.valueChanges.subscribe(price => {
       if (price) {
         this.showPriceRangeHint = price > 1 && price < 10000;
       }
     });
+
+    this.activities$ = this.activityForm.get('designation)')?.valueChanges.pipe(
+      map(designation => this.activities.filter(activity => activity.designation.startsWith(designation)))
+    );
+
     this.activityService.getActivities().subscribe(activities => {
       this.activities = activities;
     });
-    this.activities$ = this.designation.valueChanges.pipe(
-      map(designation => this.activities.filter(activity => activity.designation.startsWith(designation)))
-    );
   }
 
 
   updateActivity() {
-    this.err = JSON.parse(JSON.stringify(this.category.value));
-    this.activityService.updateActivity( <Activity>{
-      id: this.data.id,
-      designation: this.designation.value,
-      description: this.description.value,
-      startDate: this.startDate.value,
-      endDate: this.endDate.value,
-      price: Number(this.price.value),
-      category: this.err.at(0),
-      descriptiondetail: this.descriptiondetail.value,
-      location: this.location.value,
-      imageUrl: this.filename
+    this.err = JSON.parse(JSON.stringify(this.activityForm.get('category')?.value));
+   this.activityService.updateActivity( <Activity>{
+     id: 1,
+     designation: this.activityForm.get('designation')?.value,
+     description: this.activityForm.get('')?.value,
+     startDate: this.activityForm.get('startDate')?.value,
+     endDate: this.activityForm.get('endDate')?.value,
+     price: Number(this.activityForm.get('price')?.value),
+     category: this.err.at(0),
+     descriptionDetail: this.activityForm.get('descriptionDetail')?.value,
+     location: '',
+     imageUrl: this.filename,
+     maxParticipants: this.activityForm.get('maxParticipants')?.value,
+     participants: this.activityForm.get('participants')?.value,
+     isAvailableYearRound: this.activityForm.get('isAvailableYearRound')?.value,
+     isFlexibleDates: this.activityForm.get('isFlexibleDates')?.value,
+     isPlacesLimited: this.activityForm.get('isPlacesLimited')?.value,
+     bookingStartDate: this.activityForm.get('bookingStartDate')?.value,
+     bookingEndDate: this.activityForm.get('bookingEndDate')?.value,
+     city: this.activityForm.get('city')?.value,
     },this.data.id).subscribe(activity => {
       this.activityForm.reset();
-    });
+      },
+       error => {
+      this.alert.updateAlert(error.status);
+      this.rout.navigate(['/activities'])
+    }
+   );
   }
-
-
-  image(filename: string) {
-
+  onCityChange(event: any)  {
+    this.safeUrl = this.googleMapService.updateMap(event.value)
   }
 }
