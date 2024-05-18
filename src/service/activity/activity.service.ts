@@ -8,8 +8,8 @@ import {Activity} from "../../model/Activity.model";
 })
 export class ActivityService {
 
-  private baseUrl = 'http://localhost:8080/activity';
-  private comment_Url = 'http://localhost:8080/comment';
+  private baseUrl = 'http://localhost:8083/activity';
+  private comment_Url = 'http://localhost:8083/comment';
 
   constructor(private http : HttpClient) { }
 

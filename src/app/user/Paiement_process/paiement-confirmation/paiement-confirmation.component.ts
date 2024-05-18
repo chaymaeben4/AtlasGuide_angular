@@ -1,30 +1,38 @@
-import {Component,OnDestroy, OnInit , ChangeDetectorRef} from '@angular/core';
-import {PaymentService} from "../../services/payment.service";
-import {Subscription} from "rxjs";
+import {Component, OnDestroy, OnInit, ChangeDetectorRef} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {PaymentDetails} from "../../../../model/PaymentDetails.model";
+import {PaymentService} from "../../../../service/payment/payment.service";
 
 @Component({
   selector: 'app-paiement-confirmation',
   templateUrl: './paiement-confirmation.component.html',
-  styleUrl: './paiement-confirmation.component.css'
+  styleUrl: './paiement-confirmation.component.css',
 })
 export class PaiementConfirmationComponent implements OnInit, OnDestroy {
 
-  paymentMessage!: string;
-  paymentMessageSubscription!: Subscription ;
+  paymentStatus!: string;
+  paymentInformation !: PaymentDetails;
 
-  constructor(private paymentService: PaymentService ,private changeDetectorRef: ChangeDetectorRef) {}
+
+  constructor(private paymentService: PaymentService ,private changeDetectorRef: ChangeDetectorRef, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.paymentMessageSubscription = this.paymentService.paymentMessage$.subscribe(
-      message => {
-        this.paymentMessage = message;
-        console.log("Message mis à jour dans un autre composant:", this.paymentMessage);
-        this.changeDetectorRef.detectChanges();
-      }
-    );
+    this.route.data.subscribe(data => {
+      this.paymentStatus = data['state']; // state est le nom que vous avez donné dans la définition de la route
+      this.paymentInformation=this.paymentService.paymentDetails;
+    });
+  }
+  goBack(): void {
+    window.history.back();
+  }
+
+  paymentState():boolean{
+    if(this.paymentStatus ==="true")
+      return true;
+    else
+      return false;
   }
 
   ngOnDestroy() {
-    this.paymentMessageSubscription.unsubscribe();
   }
 }

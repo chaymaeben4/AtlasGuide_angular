@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {PaymentService} from "../../services/payment.service";
+import {PaymentService} from "../../../../service/payment/payment.service";
+import {PaymentDetails} from "../../../../model/PaymentDetails.model";
+
 
 @Component({
   selector: 'app-paiement-form',
@@ -10,7 +12,8 @@ import {PaymentService} from "../../services/payment.service";
 export class PaiementFormComponent {
 
   constructor(private http: HttpClient, private paymentService:PaymentService) { }
-  paymentMessage: string = '';
+  paymentStatus: string='';
+
   firstName: string = '';
   lastName: string = '';
   cardNumber: string = '';
@@ -29,7 +32,7 @@ export class PaiementFormComponent {
   expirationMonthError: string = '';
   expirationYearError: string = '';
   ccvError: string = '';
-
+  pymentDetails !:PaymentDetails;
 
 
   validateFirstName():boolean {
@@ -44,7 +47,6 @@ export class PaiementFormComponent {
       this.firstNameError = '';
       return true;
     }
-    // this.updateSubmitButtonState();
   }
   validateCCV(): boolean {
     // Validation du CCV (doit contenir exactement 3 chiffres)
@@ -139,15 +141,6 @@ export class PaiementFormComponent {
   }
 
   chargeCreditCard() {
-    // const cardNumber: string = (<HTMLInputElement>document.getElementById('card_number')).value;
-    // const expMonth: string = (<HTMLInputElement>document.getElementById('expire_month')).value;
-    // const expYear: string = (<HTMLInputElement>document.getElementById('expire_year')).value;
-    // const cvc: string = (<HTMLInputElement>document.getElementById('ccv')).value;
-    // const firstName: string = (<HTMLInputElement>document.getElementById('first-name')).value;
-    // const lastName: string = (<HTMLInputElement>document.getElementById('last-name')).value;
-    // const email: string = (<HTMLInputElement>document.getElementById('email')).value;
-    // const phone: string = (<HTMLInputElement>document.getElementById('phone')).value;
-
     (<any>window).Stripe.card.createToken({
       number: this.cardNumber,
       exp_month: this.expirationMonth,
@@ -175,14 +168,16 @@ export class PaiementFormComponent {
     }
     this.paymentService.chargeCard(bodyData).subscribe(
       response => {
-        this.paymentMessage=response;
-        console.log(this.paymentMessage);
-        this.paymentService.updatePaymentStatus(this.paymentMessage);
-      },
+        this.paymentStatus=response;
+        console.log(this.paymentStatus);
+        this.paymentService.updatePaymentStatus(this.paymentStatus);
+        this.pymentDetails=new PaymentDetails(Math.floor(Math.random() * 1000),this.firstName,this.lastName,this.email,this.cardNumber.substring(14,16),10);
+        this.paymentService.paymentDetails=this.pymentDetails;
+        },
       error => {
         console.error('Erreur lors du traitement du paiement :', error);
-        this.paymentMessage = 'Une erreur est survenue lors du traitement du paiement.';
-        this.paymentService.updatePaymentStatus(this.paymentMessage);
+        this.paymentStatus = 'Une erreur est survenue lors du traitement du paiement.';
+        this.paymentService.updatePaymentStatus(this.paymentStatus);
       }
     );
   }

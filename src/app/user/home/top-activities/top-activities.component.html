@@ -53,7 +53,7 @@
                                 </div>
                                 <p>{{activity.description}}</p>
                                 <div class="btn-wrap">
-                                    <a href="#" routerLink="/Cart" class="button-text width-6">Add To Cart<i class="fas fa-arrow-right"></i></a>
+                                    <button class="button-text width-6" (click)="addToCart(activity.id,2,2)">Add To Cart<i class="fas fa-arrow-right"></i></button>
                                     <a href="#" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
                                 </div>
                             </div>

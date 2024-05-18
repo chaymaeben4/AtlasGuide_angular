@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Activity} from "../../../../model/Activity.model";
 import {ActivityService} from "../../../../service/activity/activity.service";
+import {CartService} from "../../../../service/cart/cart.service";
 
 
 @Component({
@@ -15,9 +16,9 @@ export class TopActivitiesComponent implements OnInit{
     numberOfComments : number [] = [];
 
     clients: any[] = [];
-constructor(private  activityService : ActivityService) {}
+constructor(private  activityService : ActivityService , private cartService:CartService) {}
     ngOnInit() {
-        this.getActivitiesWithHighRating();
+        this.getAllActivities();
     }
 
     getActivitiesWithHighRating(): void {
@@ -51,15 +52,25 @@ constructor(private  activityService : ActivityService) {}
     );
     }
 
-//     getAllActivities() : void{
-//   this.activityService.getAllActivities().subscribe(
-//       (data : Activity[]) =>{
-//       this.activities=data;},
-//       (error) => {
-//           console.log(error);
-//       });
-// }
+    getAllActivities() : void{
+  this.activityService.getAllActivities().subscribe(
+      (data : Activity[]) =>{
+      this.activities=data;},
+      (error) => {
+          console.log(error);
+      });
+}
 
+
+  addToCart(activityId: number, userId: number, nbr: number) {
+    this.cartService.addToCart(activityId, userId, nbr).subscribe(() => {
+      // Réussite de la requête, exécutez ici des actions après l'ajout au panier
+      console.log('Élément ajouté au panier avec succès');
+    }, error => {
+      console.error('Une erreur s\'est produite lors de l\'ajout au panier :', error);
+      // Gérez les erreurs ici
+    });
+  }
 
 
 

@@ -8,7 +8,7 @@ import {PaymentDetails} from "../../model/PaymentDetails.model";
 })
 export class PaymentService {
 
-  private apiUrl = 'http://localhost:8081/api/payment/charge';
+  private apiUrl = 'http://localhost:8083/api/payment/charge';
   private _paymentDetails!:PaymentDetails;
   private paymentMessageSubject = new Subject<string>();
   paymentMessage$: Observable<string> = this.paymentMessageSubject.asObservable();
