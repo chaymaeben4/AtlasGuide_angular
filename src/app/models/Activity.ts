@@ -1,5 +1,6 @@
 import {Reservation} from "./Reservation";
 import {Agence} from "./Agence";
+import {Program} from "./Program";
 export const isBookingAvailable= (activity:Activity)=>{
   const currentDate = new Date();
   if (!activity.isFlexibleDates) {
@@ -38,12 +39,13 @@ export class Activity {
   isFlexibleDates: boolean;
   isPlacesLimited: boolean;
 
+  program!: Program;
 
   status: string;
   bookingStartDate: Date;
   bookingEndDate: Date;
   city: string;
-  agence: Agence
+
 
   constructor(
     id: number,
@@ -86,7 +88,6 @@ export class Activity {
     this.bookingStartDate = bookingStartDate;
     this.bookingEndDate = bookingEndDate;
     this.city = city;
-    this.agence = agence;
   }
 
 

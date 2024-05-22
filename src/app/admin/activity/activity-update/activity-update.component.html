@@ -1,6 +1,6 @@
 <div class="container alert alert-light" >
   <h2 style="margin-left: 40%;">Update Activity</h2>
-  <img src="./assets/images/img25.jpg" alt="" class="ii" />
+  <img  *ngIf="activity$ | async as activity" src="{{activity.imageUrl}}" alt="" class="ii" />
   <h2 class="inner-title" *ngIf="activity$ | async as activity">{{activity.designation}}</h2>
   <div class="db-info-wrap1 db-add-tour-wrap">
     <form [formGroup]="activityForm" (ngSubmit)="updateActivity()">
@@ -239,7 +239,7 @@
                 </div>
               </mat-form-field>
               <div class="publish-action">
-                <button mat-raised-button color="primary" type="submit" [disabled]="activityForm.valid">Publish</button>
+                <button mat-raised-button color="primary" type="submit" >Publish</button>
               </div>
             </div>
           </div>

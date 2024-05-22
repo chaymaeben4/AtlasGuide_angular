@@ -1,4 +1,5 @@
-<div class="layout-wrapper layout-content-navbar">
+
+<div class="dashboard-container layout-wrapper layout-content-navbar">
   <div class="layout-container">
     <div class="container-xxl flex-grow-1 container-p-y">
       <h4 class="py-3 mb-4"><span class="text-muted fw-light">Activities/</span>All</h4>
@@ -17,8 +18,8 @@
                  [ngClass]="{'bg-label-info': item=='Active',
                  'bg-label-danger': item=='Expired',
                   'bg-label-warning': item=='Pending',}"
-                     style="padding: 3px 10px 3px 10px;margin-left: 10px;"
-               (click)="stateFilter(item)">
+                 style="padding: 3px 10px 3px 10px;margin-left: 10px;"
+                 (click)="stateFilter(item)">
                   {{item}}
                </span>
               </div>
@@ -49,7 +50,7 @@
                   [ngClass]="{'bg-label-info': element.status==='Active',
                   'bg-label-danger': element.status==='Expired',
                   'bg-label-warning': element.status==='Pending'}"
-                class="badge rounded-pill me-1">
+                  class="badge rounded-pill me-1">
                   {{element.status}}</span>
                 </td>
               </ng-container>
@@ -62,35 +63,17 @@
                   <span class="badge" style="margin-left: 10px;background-color: orangered;" (click)="openDeleteConfirmationDialog(element.id)">
                     <i class="far fa-trash-alt"></i>
                   </span>
-                  <span class="badge" style="margin-left: 10px;background-color: yellow;" (click)="reserve(element.id)">
-                    <i class="far fa-envelope"></i>
-                  </span>
+
                 </td>
               </ng-container>
               <tr  mat-header-row *matHeaderRowDef="['designation','startDate', 'endDate', 'status', 'action']"></tr>
               <tr  mat-row *matRowDef="let row;let i = index; columns: ['designation','startDate', 'endDate','status', 'action']"
-              [ngClass]="rowStyles[(i%2)]" ></tr>
+                   [ngClass]="rowStyles[(i%2)]" ></tr>
             </table>
             <mat-paginator [pageSize]="5" [pageSizeOptions]="[5,10,15]"></mat-paginator>
           </div>
         </div>
       </div>
-      <!-- Footer -->
-      <footer class="content-footer footer bg-footer-theme">
-        <div class="container-xxl">
-          <div
-            class="footer-container d-flex align-items-center justify-content-between py-3 flex-md-row flex-column">
-            <div class="text-body mb-2 mb-md-0">
-              ©
-              <script>
-                document.write(new Date().getFullYear());
-              </script>
-              , made with <span class="text-danger"><i class="tf-icons mdi mdi-heart"></i></span> by Lmati Yasser
-            </div>
-          </div>
-        </div>
-      </footer>
-      <!-- / Footer -->
       <div class="content-backdrop fade"></div>
     </div>
   </div>

@@ -763,7 +763,7 @@ form {
   position: relative;
 }
 
-input[type=text],
+
 input[type=email],
 input[type=url],
 input[type=password],
@@ -781,7 +781,6 @@ input[type=color] {
   height: 48px;
 }
 
-input[type=text],
 input[type=email],
 input[type=url],
 input[type=password],
@@ -1945,6 +1944,14 @@ input[type=submit]:focus {
   margin-left: -18%;
 }
 .slide-out1 {
+
+  width: 100%;
+}
+
+.slide-in2 {
+  margin-left: -16%;
+}
+.slide-out2 {
 
   width: 100%;
 }

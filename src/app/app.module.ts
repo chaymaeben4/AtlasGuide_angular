@@ -22,12 +22,14 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import {CloudinaryModule} from '@cloudinary/ng';
 
 
+
 // @ts-ignore
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     SwaggerComponent,
+
   ],
   imports: [
     GoogleMapsModule,

@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Activity} from "../../../../model/Activity.model";
+
 import {ActivityService} from "../../../../service/activity/activity.service";
+import {Activity} from "../../../models/Activity";
+import {PipsService} from "../../../admin/pips/pips.service";
 
 
 @Component({
@@ -15,9 +17,12 @@ export class TopActivitiesComponent implements OnInit{
     numberOfComments : number [] = [];
 
     clients: any[] = [];
-constructor(private  activityService : ActivityService) {}
+    constructor(
+      private  activityService : ActivityService,
+      protected Pipe: PipsService) {}
     ngOnInit() {
         this.getActivitiesWithHighRating();
+        this.getAllActivities();
     }
 
     getActivitiesWithHighRating(): void {
@@ -51,14 +56,14 @@ constructor(private  activityService : ActivityService) {}
     );
     }
 
-//     getAllActivities() : void{
-//   this.activityService.getAllActivities().subscribe(
-//       (data : Activity[]) =>{
-//       this.activities=data;},
-//       (error) => {
-//           console.log(error);
-//       });
-// }
+   getAllActivities() : void{
+      this.activityService.getAllActivities().subscribe(
+        (data : Activity[]) =>{
+          this.activities=data;},
+        (error) => {
+          console.log(error);
+        });
+ }
 
 
 

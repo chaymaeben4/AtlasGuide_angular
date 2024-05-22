@@ -15,7 +15,7 @@
                     <div class="package-wrap">
                         <figure class="feature-image">
                             <a  routerLink="/Details">
-                                <img src="{{activity.image_path}}" alt="" >
+                                <img src="{{activity.imageUrl}}" alt="" >
                             </a>
                         </figure>
                         <div class="package-price">
@@ -28,15 +28,15 @@
                                 <ul>
                                     <li>
                                         <i class="far fa-clock"></i>
-                                        {{activity.date}}
+                                        {{Pipe.formatDateString(activity.startDate.toString(),'yyyy-MM-dd','yyyy-MM-dd') }}
                                     </li>
                                     <li>
                                         <i class="fas fa-user-friends"></i>
-                                        People: 5
+                                        People: {{activity.participants}}
                                     </li>
                                     <li>
                                         <i class="fas fa-map-marker-alt"></i>
-                                        {{activity.location}}
+                                        {{activity.city}}
                                     </li>
                                 </ul>
                             </div>

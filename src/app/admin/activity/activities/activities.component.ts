@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Activity} from "../../../models/Activity";
 import {ActivityService} from "../activity.service";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
-import {Product} from "../../products/product";
+
 
 @Component({
   selector: 'app-activities',

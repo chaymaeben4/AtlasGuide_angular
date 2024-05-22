@@ -1,7 +1,8 @@
 import {Component, ElementRef, OnInit, Renderer2} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ActivityService} from "../../../service/activity/activity.service";
-import {Activity} from "../../../model/Activity.model";
+import {Activity} from "../../models/Activity";
+
 
 @Component({
   selector: 'app-activity-details',
@@ -15,7 +16,7 @@ export class ActivityDetailsComponent implements OnInit{
   isMapTabSelected = false;
   activityId !: number;
 
-  activity : Activity = new Activity();
+  activity!: Activity;
 
 
   ngOnInit(): void {

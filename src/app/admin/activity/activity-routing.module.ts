@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ActivityCreateComponent} from "./activity-create/activity-create.component";
 import {ActivityListComponent} from "./activity-list/activity-list.component";
-import {ActivityResolver} from "./Resolver/ActivityResolver";
+
 
 const routes: Routes = [
   {
@@ -12,7 +12,6 @@ const routes: Routes = [
   {
     path: "activities",
     component: ActivityListComponent,
-    resolve: { activities: ActivityResolver }
   },
 ];
 

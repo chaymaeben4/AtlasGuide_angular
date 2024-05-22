@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class SessionService {
 
-  constructor() { }
+  id!: number;
+  constructor() { if (this.getSessionData('user')) this.id = this.getSessionData('user').Uid; }
 
   setSessionData(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));

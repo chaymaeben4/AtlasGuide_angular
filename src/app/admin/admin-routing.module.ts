@@ -4,6 +4,9 @@ import {DashbordComponent} from "./dashbord/dashbord.component";
 import {CommentListComponent} from "./comment/comment-list/comment-list.component";
 import {AccountComponent} from "./account/account/account.component";
 import {LoginComponent} from "./authentification/login/login.component";
+import {SidebarComponent} from "./sidebar/sidebar.component";
+import {AccountResolver} from "./account/Resolver/account.resolver";
+import {ProgramComponent} from "./activity/program/program.component";
 
 const routes: Routes = [
 
@@ -13,7 +16,10 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    component: AccountComponent
+    component: AccountComponent,
+    resolve: {
+      account: AccountResolver
+    }
   },
   {
     path: 'dashboard',
@@ -23,6 +29,9 @@ const routes: Routes = [
     path: "comments",
     component: CommentListComponent
   },
+  {
+    path: 'prog',component: ProgramComponent
+  }
 
 ];
 

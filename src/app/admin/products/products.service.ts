@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Product } from './product';
+
 import {environnment} from "../../environnment/environnment";
 
 interface ProductDTO {
@@ -18,7 +18,7 @@ export class ProductsService {
   private productsUrl = environnment.adminURL + '/products';
 
   constructor(private http: HttpClient) { }
-
+/*
   getProducts(): Observable<Product[]> {
     return this.http.get<ProductDTO[]>(this.productsUrl + '/all').pipe(
       map(products => products.map(product => {
@@ -57,5 +57,5 @@ export class ProductsService {
       price: product.price
     };
   }
-
+*/
 }

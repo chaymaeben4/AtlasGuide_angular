@@ -59,8 +59,9 @@ export class AuthentificationService {
       })});
   }
 
-  deleteAccount(id: number): Observable<any>{
-    return this.http.delete<any>('http://localhost:8080/CityThrillsMorocco/'+id);
+
+  deleteAccount(): Observable<any>{
+    return this.http.delete<any>('http://localhost:8080/CityThrillsMorocco/'+this.sessionService.getSessionData('user').Uid);
   }
 
 
@@ -89,6 +90,7 @@ export class AuthentificationService {
       phone: agence.phone,
       email: agence.email,
       password: agence.password,
+      user: agence.user,
     }
   }
 

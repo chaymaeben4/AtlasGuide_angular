@@ -658,13 +658,13 @@ input[type=datetime-local],
 input[type=color],
 textarea {
   background-color: AliceBlue;
-  border: 1px solid rgba(136, 170, 236, 0.8);
-  font-size: 14px;
+  border: 2px solid rgba(64, 48, 175, 0.8);
+  font-size: 20px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   border-radius: 10px;
-  height: 45px;
+  height: 55px;
   resize: none;
   padding: 0 10px;
 }
@@ -684,7 +684,7 @@ input[type=datetime]:focus,
 input[type=datetime-local]:focus,
 input[type=color]:focus,
 textarea:focus {
-  border-color: #F56960;
+  border-color: #9760f5;
   outline: 0;
 }
 input[type=text]:-webkit-autofill, input[type=text]:-webkit-autofill:hover, input[type=text]:-webkit-autofill:focus, input[type=text]:-webkit-autofill:active,
@@ -1915,6 +1915,10 @@ Tour packages added css
   .package-wrap .package-content {
     padding: 0 20px 20px;
   }
+
+  .mat-mdc-form-field-icon-suffix{
+    margin-left: 10%;
+  }
 }
 
 /* -----------------------------------
@@ -1954,7 +1958,8 @@ login form css
 }
 .login-page .login-from-wrap {
   position: relative;
-  width: 400px;
+  width: 600px;
+  font-size: large;
   max-width: 100%;
   margin: 30px auto;
   background: #fff;

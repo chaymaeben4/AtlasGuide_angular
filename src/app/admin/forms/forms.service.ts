@@ -12,6 +12,7 @@ export class FormsService {
   userForm: FormGroup;
   activityForm: FormGroup;
   passwordConfirmation: FormGroup;
+  programelementform: FormGroup;
   constructor(private formBuilder: FormBuilder) {
     // logging form //
     this.loginForm = this.formBuilder.group({
@@ -87,5 +88,11 @@ export class FormsService {
       }),
     });
 
+    this.programelementform = this.formBuilder.group(
+      {
+        name: ['', Validators.required],
+        dscription: ['', Validators.required],
+      }
+    )
   }
 }

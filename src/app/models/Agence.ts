@@ -1,3 +1,5 @@
+import {User} from "./User";
+
 export class Agence {
   id: number;
   name: string;
@@ -5,6 +7,7 @@ export class Agence {
   email: string;
   phone: string;
   password: string;
+  user!: User
   constructor(
     id: number,
     name: string,

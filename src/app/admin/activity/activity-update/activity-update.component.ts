@@ -69,7 +69,6 @@ export class ActivityUpdateComponent {
     this.activityForm = this.form.activityForm;
     this.AuthenticationService.isAuthenticated()
     this.activity$ = this.activityService.getActivity(this.data.id)
-    console.log(this.activity$)
     this.activity$.subscribe(activity => {
       this.activityForm.patchValue(activity);
       this.filename = activity.imageUrl;

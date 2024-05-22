@@ -21,7 +21,10 @@ export class DialogService {
     const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.activityService.deleteActivity(id);
+        this.activityService.getActivity(id).subscribe(
+          ac => console.log(ac.city)
+        );
+        this.activityService.deleteActivity(id)
       }
     });
   }

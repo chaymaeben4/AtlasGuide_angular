@@ -13,13 +13,15 @@ import {PipsService} from "../../pips/pips.service";
 import {FiltersService} from "../../filter/filters.service";
 import {SessionService} from "../../session.service";
 import {DialogService} from "../../dialog/dialog.service";
+import {Reservation} from "../../../models/Reservation";
+import {User} from "../../../../model/User.model";
 @Component({
   selector: 'app-activity-list',
   templateUrl: './activity-list.component.html',
   styleUrls: ['./activity-list.component.css']
 })
 export class ActivityListComponent implements OnInit,AfterViewInit{
-
+  user!: User;
   status = '';
   activities = new MatTableDataSource<Activity>([]);
   activities$: Activity[] = [];
@@ -30,8 +32,9 @@ export class ActivityListComponent implements OnInit,AfterViewInit{
   rowIcon: string[] = ["mdi mdi-waveform mdi-20px text-success me-3","mdi mdi-checkbox-marked-circle-plus-outline mdi-20px text-danger me-3"]
   @ViewChild(MatSort) sort: MatSort | null = null;
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
-
+  reservation!: Reservation;
   private webSocket: WebSocket;
+
   constructor(
     private activityService: ActivityService,
     private AuthenticatinService: AuthentificationService,
@@ -46,14 +49,7 @@ export class ActivityListComponent implements OnInit,AfterViewInit{
   }
 
   ngOnInit(): void {
-    this.webSocket = new WebSocket('ws://localhost:8080/activity?userId='+this.sessionService.getSessionData('user').Uid);
-    this.webSocket.onmessage = (event) => {
-      console.log(JSON.parse(event.data))
-      this.activities$ = JSON.parse(event.data);
-      this.activities = new MatTableDataSource(this.activities$);
-      this.activities.sort = this.sort;
-      this.activities.paginator = this.paginator;
-    };
+    this.getAgencyActivities()
     this.AuthenticatinService.isAuthenticated()
   }
 
@@ -68,9 +64,11 @@ export class ActivityListComponent implements OnInit,AfterViewInit{
 
   // Dialogues //
   openDeleteConfirmationDialog(id: number): void {
+    console.log(id)
     this.dialog.DeleteConfirmationDialog(id)
-    this.getAgencyActivities();
+    this.getAgencyActivities()
   }
+
   openUpdateDialog(id: number): void {
     this.dialog.UpdateDialog(id)
   }
@@ -91,7 +89,4 @@ export class ActivityListComponent implements OnInit,AfterViewInit{
   }
   generateRandomBinaryDigit() {return Math.round(Math.random());}
 
-  reserve(id: number) {
-    this.activityService.createReservation(23,5);
-  }
 }

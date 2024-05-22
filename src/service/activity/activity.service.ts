@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Activity} from "../../model/Activity.model";
+import {Activity} from "../../app/models/Activity";
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ActivityService {
   constructor(private http : HttpClient) { }
 
   getAllActivities(): Observable<Activity[]> {
-    return this.http.get<Activity[]>(`${this.baseUrl}/activities`);
+    return this.http.get<Activity[]>(`http://localhost:8080/CityThrillsMorocco/Admin/activities`);
   }
 
   getActivitiesWithHighRating () : Observable<Activity[]> {

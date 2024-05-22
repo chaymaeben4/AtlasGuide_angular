@@ -23,12 +23,25 @@ export class AccountService {
     return this.data;
   }
 
+  getAgence(): Observable<Agence>{
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + this.sessionService.getSessionData('user').token)
+      .set('Content-Type', 'application/json');
+    return this.http.get<Agence>('http://localhost:8080/CityThrillsMorocco/Admin/'+this.sessionService.getSessionData('user').Uid,{headers})
+  }
+
   getUser(): Observable<User>{
-    return this.http.get<User>('http://localhost:8080/CityThrillsMorocco/'+this.sessionService.getSessionData('user').Uid,{
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + this.sessionService.getSessionData('user').token)
+      .set('Content-Type', 'application/json');
+    return this.http.get<User>('http://localhost:8080/CityThrillsMorocco/'+this.sessionService.getSessionData('user').Uid,{headers})
+  }
+
+  updateAgence(agence: Agence,id: number): Observable<any> {
+    return this.http.put<any>('http://localhost:8080/CityThrillsMorocco/Admin/'+id,agence,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
-      })
-    })
+      })});
   }
 
 

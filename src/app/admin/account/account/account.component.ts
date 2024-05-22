@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthentificationService} from "../../authentification/authentification.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {SessionService} from "../../session.service";
 import {Agence} from "../../../models/Agence";
 import {AccountService} from "../account.service";
+import {ActivatedRoute, Route} from "@angular/router";
+import {AlertsService} from "../../alerts/alerts.service";
+import {FiltersService} from "../../filter/filters.service";
 
 @Component({
   selector: 'app-account',
@@ -14,15 +16,20 @@ export class AccountComponent implements OnInit{
 
   constructor(private authService: AuthentificationService,
               private formBuilder: FormBuilder,
-              private accountService: AccountService,) {}
+              private alertService: AlertsService,
+              private route: ActivatedRoute,
+              private accountService: AccountService,
+              protected filterService: FiltersService) {}
 
   updateForm!: FormGroup;
   confirmation: boolean = false;
   agence!: Agence;
 
   ngOnInit() {
-   this.authService.isAuthenticated();
-   this.agence = this.accountService.connect();
+   //this.authService.isAuthenticated();
+   this.agence = this.route.snapshot.data['account'];
+   this.agence.user = this.route.snapshot.data['account'].admin;
+   console.log(this.agence);
    this.updateForm = this.formBuilder.group({
      name: [this.agence.name, Validators.required],
      email: [this.agence.email, [Validators.required, Validators.email]],
@@ -43,34 +50,19 @@ export class AccountComponent implements OnInit{
   }
 
   deleteAccount(){
-    this.authService.deleteAccount(this.agence.id).subscribe(
+    this.authService.deleteAccount().subscribe(
       messages => {
         console.log(JSON.stringify(messages));
       },
-      error => {
-        if (error.status===200){
-          console.log("success")
-        }
-        if (error.status === 400) {
-          console.log("error")
-        }
-      }
+      error => this.alertService.deleteAlert()
     );
   }
-  updateData(){
-    this.authService.updateData(this.updateForm.value,this.agence.id).subscribe(
-      messages => {
-        console.log(JSON.stringify(messages));
-      },
-      error => {
-        if (error.status===200){
-          console.log("success")
-        }
-        if (error.status === 400) {
-          console.log("error")
-        }
-      }
 
+  updateData(){
+    this.accountService.updateAgence(this.updateForm.value,this.agence.id).subscribe(
+      messages => {
+        this.alertService.updateAlert(messages.body)
+      },
     );
   }
 
