@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthentificationService} from "../../authentification/authentification.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {passwordValidator} from "../../authentification/passwordValidator/password-validator";
 import {SessionService} from "../../session.service";
 import {Agence} from "../../../models/Agence";
-import Swal from "sweetalert2";
+import {AccountService} from "../account.service";
 
 @Component({
   selector: 'app-account',
@@ -15,7 +14,7 @@ export class AccountComponent implements OnInit{
 
   constructor(private authService: AuthentificationService,
               private formBuilder: FormBuilder,
-              private sessionService: SessionService,) {}
+              private accountService: AccountService,) {}
 
   updateForm!: FormGroup;
   confirmation: boolean = false;
@@ -23,7 +22,7 @@ export class AccountComponent implements OnInit{
 
   ngOnInit() {
    this.authService.isAuthenticated();
-   this.agence = this.sessionService.getSessionData('user').agence;
+   this.agence = this.accountService.connect();
    this.updateForm = this.formBuilder.group({
      name: [this.agence.name, Validators.required],
      email: [this.agence.email, [Validators.required, Validators.email]],
@@ -59,7 +58,6 @@ export class AccountComponent implements OnInit{
     );
   }
   updateData(){
-
     this.authService.updateData(this.updateForm.value,this.agence.id).subscribe(
       messages => {
         console.log(JSON.stringify(messages));

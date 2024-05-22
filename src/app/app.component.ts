@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
-
-
-
-
+import {Component, OnInit} from '@angular/core';
+import {FiltersService} from "./admin/filter/filters.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'frontend';
+
+export class AppComponent implements OnInit{
+  constructor(protected filterService: FiltersService) {
+  }
+  ngOnInit() {
+  }
 }

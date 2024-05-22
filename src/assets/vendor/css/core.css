@@ -377,7 +377,6 @@ tfoot,
 tr,
 td,
 th {
-  border-color: inherit;
   border-width: 0;
 }
 

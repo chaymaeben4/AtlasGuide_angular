@@ -13,7 +13,6 @@ import {AuthentificationModule} from "./authentification/authentification.module
   declarations: [
     DashbordComponent,
     SidebarComponent,
-
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

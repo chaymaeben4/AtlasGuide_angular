@@ -5,6 +5,7 @@ import {Agence} from "../../models/Agence";
 import {Injectable} from "@angular/core";
 import {SessionService} from "../session.service";
 import {Router} from "@angular/router";
+import {User} from "../../models/User";
 
 @Injectable({
   providedIn: 'root'
@@ -29,40 +30,43 @@ export class AuthentificationService {
     )
   }
 
-  register(agence: {
+  register(user: {
+    firstname: string;
+    lastname: string;
     password: string;
     phone: string;
-    name: string;
-    location: string;
     email: string
-  }): Observable<any> {
-    return this.http.post<AgenceDto>('http://localhost:8080/CityThrillsMorocco/Admin', agence, {
+  },role: boolean): Observable<any> {
+    let roleName = "ROLE_USER"
+    if (role) roleName = "ROLE_CONTENT_MANAGER"
+    return this.http.post<User>('http://localhost:8080/CityThrillsMorocco/register/'+roleName, user, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
-      })}).pipe(
-      map(agence => this.convertToAgence(agence))
-    );
+      })});
   }
 
   updateData(agence: Agence,id: number): Observable<any> {
-    return this.http.put<any>('http://localhost:8080/CityThrillsMorocco/Admin/'+id,agence,{
+    return this.http.put<any>('http://localhost:8080/CityThrillsMorocco/'+id,agence,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })});
   }
 
   resetPasword(email: string): Observable<any>  {
-    return this.http.post<any>('http://localhost:8080/CityThrillsMorocco/Admin/Reset-password',email,{
+    return this.http.post<any>('http://localhost:8080/CityThrillsMorocco/Reset-password',email,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })});
   }
 
   deleteAccount(id: number): Observable<any>{
-    return this.http.delete<any>('http://localhost:8080/CityThrillsMorocco/Admin/'+id);
+    return this.http.delete<any>('http://localhost:8080/CityThrillsMorocco/'+id);
   }
+
+
+
   registerNewPassword(token: string,password: string): Observable<any>{
-    return this.http.post<any>('http://localhost:8080/CityThrillsMorocco/Admin/New_password?token='+token,password,
+    return this.http.post<any>('http://localhost:8080/CityThrillsMorocco/New_password?token='+token,password,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
@@ -71,7 +75,7 @@ export class AuthentificationService {
 
 
   verifyAccount(token: string): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/CityThrillsMorocco/Admin/confirm-account?token='+token,{
+    return this.http.get<any>('http://localhost:8080/CityThrillsMorocco/confirm-account?token='+token,{
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })});
@@ -87,4 +91,5 @@ export class AuthentificationService {
       password: agence.password,
     }
   }
+
 }

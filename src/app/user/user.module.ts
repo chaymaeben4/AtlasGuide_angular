@@ -21,34 +21,40 @@ import {HomeComponent} from "./home/home.component";
 import {UserRoutingModule} from "./user-routing.module";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 import {BrowserModule} from "@angular/platform-browser";
-import {AppRoutingModule} from "../app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {SlickCarouselModule} from "ngx-slick-carousel";
+import {ActivitesByCityComponent} from "./activites-by-city/activites-by-city.component";
+import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
+import { UserAccountComponent } from './user-account/user-account.component';
+
 
 
 
 @NgModule({
     declarations: [
-        HomeComponent,
-        SliderComponent,
-        TopActivitiesComponent,
-        HeaderComponent,
-        FooterComponent,
-        FamousPlacesComponent,
-        LoginComponent,
-        SignUpComponent,
-        CartComponent,
-        PaiementFormComponent,
-        PaiementConfirmationComponent,
-        WishlistComponent,
-        CitiesComponent,
-        CallbackComponent,
-        TestimonialComponent,
-        ActivityDetailsComponent,
-        BodyDetailsComponent,
-        DetailsHeaderComponent
+      HomeComponent,
+      SliderComponent,
+      TopActivitiesComponent,
+      HeaderComponent,
+      FooterComponent,
+      FamousPlacesComponent,
+      LoginComponent,
+      SignUpComponent,
+      CartComponent,
+      PaiementFormComponent,
+      PaiementConfirmationComponent,
+      WishlistComponent,
+      CitiesComponent,
+      CallbackComponent,
+      TestimonialComponent,
+      ActivityDetailsComponent,
+      BodyDetailsComponent,
+      DetailsHeaderComponent,
+      ActivitesByCityComponent,
+      UserSidebarComponent,
+      UserAccountComponent,
     ],
     imports: [
         CommonModule,
@@ -63,7 +69,8 @@ import {SlickCarouselModule} from "ngx-slick-carousel";
         provideAnimationsAsync()
     ],
     exports: [
-        FooterComponent
+        FooterComponent,
+        UserSidebarComponent
     ]
 })
 export class UserModule { }
