@@ -8,17 +8,17 @@ import {PaymentDetails} from "../../model/PaymentDetails.model";
 })
 export class PaymentService {
 
-  private apiUrl = 'http://localhost:8081/api/payment/charge';
-  private _paymentDetails!:PaymentDetails;
-  private paymentMessageSubject = new Subject<string>();
-  paymentMessage$: Observable<string> = this.paymentMessageSubject.asObservable();
+  private apiUrl = 'http://localhost:8083/CityThrillsMorocco/api/payment';
+
+  private paymentMessageSubject = new Subject<boolean>();
+  paymentMessage$: Observable<boolean> = this.paymentMessageSubject.asObservable();
 
 
   constructor(private http: HttpClient) {}
 
 
-  chargeCard(paymentRequest: any): Observable<string> {
-    return this.http.post<string>(this.apiUrl, paymentRequest, {
+  chargeCard(paymentRequest: any,userId: number): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}/charge/${userId}`, paymentRequest, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),
@@ -26,17 +26,15 @@ export class PaymentService {
     });
   }
 
+  getPaymentInformation(userId: number):Observable<PaymentDetails>{
+    return this.http.get<PaymentDetails>(`${this.apiUrl}/${userId}`);
+  }
 
-  updatePaymentStatus(message: string) {
+  updatePaymentStatus(message: boolean) {
     this.paymentMessageSubject.next(message);
+    console.log(message)
   }
 
 
-  set paymentDetails(value: PaymentDetails) {
-    this._paymentDetails = value;
-  }
 
-  get paymentDetails(): PaymentDetails {
-    return this._paymentDetails;
-  }
 }

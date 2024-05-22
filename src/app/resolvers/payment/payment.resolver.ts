@@ -4,10 +4,11 @@ import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
 
 @Injectable()
-export class PaymentResolver implements Resolve<string>{
+export class PaymentResolver implements Resolve<boolean>{
   constructor(private paymentService: PaymentService) {
   }
-  resolve():Observable<string>{
+  resolve():Observable<boolean>{
+    console.log(this.paymentService.paymentMessage$)
     return this.paymentService.paymentMessage$;
   }
 }

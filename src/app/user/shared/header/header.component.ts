@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { Router} from "@angular/router";
+import {CartService} from "../../../../service/cart/cart.service";
 
 
 enum City {
@@ -34,13 +35,17 @@ enum City {
 })
 export class HeaderComponent implements OnInit{
 
-  constructor(private router : Router ) {
+  constructor(private router : Router,private cartService :CartService ) {
   }
 
+ elementCount :number = 0;
   isHomepage : Boolean =false;
 
   ngOnInit(){
     this.isHomepage=this.router.url==='/';
+    this.cartService.elementCountVariable$.subscribe(count => {
+      this.elementCount = count;
+    });
   }
   public isLightTheme = true;
 
