@@ -3,8 +3,9 @@ import {User} from "./User.model";
 import {CartElement} from "./CartElement.model";
 
 export class Cart {
-    id: number | undefined;
+    id: number =0;
    total_amount:number=0;
    cartElements:CartElement[] = [];
+
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Cart} from "../../../../../model/Cart.model";
 import {CartService} from "../../../../../service/cart/cart.service";
+import {CartElement} from "../../../../../model/CartElement.model";
 
 
 
@@ -12,7 +13,7 @@ import {CartService} from "../../../../../service/cart/cart.service";
 })
 export class CartComponent implements OnInit {
     cart: Cart = new Cart();
-    quantity: number = 1;
+
 
     constructor(private cartService: CartService) {
     }
@@ -28,19 +29,31 @@ export class CartComponent implements OnInit {
                 this.cart = cart;
             });
     }
+    deleteFromCart(element: CartElement ,cart: Cart): void {
 
-    calculateSubtotal(price: number, quantity: number): number {
-        return price * quantity;
-    }
-
-    incrementQuantity() {
-        this.quantity++;
-    }
-
-    decrementQuantity() {
-        if (this.quantity > 1) {
-            this.quantity--;
+      this.cartService.deleteFromCart(element.id,cart.id).subscribe(
+        () => {
+          const index = this.cart.cartElements.indexOf(element);
+          if (index !== -1) {
+            this.cart.cartElements.splice(index, 1);
+            this.getCartDetails();
+            this.cartService.decrementElementCount();
+          }
+          console.log('Élément de panier supprimé avec succès');
+        },
+        (error) => {
+          console.error('Erreur lors de la suppression de l\'élément de panier :', error);
         }
+      );
+
     }
+
+
+
+
+
+
+
+
 
 }

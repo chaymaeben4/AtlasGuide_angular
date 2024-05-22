@@ -8,6 +8,7 @@ import {CartComponent} from "./Paiement_process/cart_wishlist/cart/cart.componen
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "../admin/authentification/login/login.component";
 import {RegisterComponent} from "../admin/authentification/register/register.component";
+import {PaymentResolver} from "../resolvers/payment/payment.resolver";
 
 
 const routes: Routes = [
@@ -15,8 +16,8 @@ const routes: Routes = [
   {path:'Admin_login' , component : LoginComponent},
   {path:'Admin_sign_up' , component : RegisterComponent},
   {path:'Cart' , component : CartComponent},
-  {path:'paiement' , component : PaiementFormComponent},
-  {path:'confirmation' , component : PaiementConfirmationComponent},
+  {path:'paiement' , component : PaiementFormComponent },
+  {path:'confirmation' , component : PaiementConfirmationComponent , resolve: { state: PaymentResolver}},
   {path:'wishlist' , component : WishlistComponent},
   {path:'Details/:id' , component : ActivityDetailsComponent},
 ];

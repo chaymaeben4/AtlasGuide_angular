@@ -12,7 +12,7 @@ import {PaymentDetails} from "../../../../model/PaymentDetails.model";
 export class PaiementFormComponent {
 
   constructor(private http: HttpClient, private paymentService:PaymentService) { }
-  paymentStatus: string='';
+  paymentStatus!: boolean;
 
   firstName: string = '';
   lastName: string = '';
@@ -32,7 +32,7 @@ export class PaiementFormComponent {
   expirationMonthError: string = '';
   expirationYearError: string = '';
   ccvError: string = '';
-  pymentDetails !:PaymentDetails;
+
 
 
   validateFirstName():boolean {
@@ -149,7 +149,6 @@ export class PaiementFormComponent {
     }, (status: number, response: any) => {
       if (status === 200) {
         let token = response.id;
-        console.log(token)
         this.chargeCard(token,this.firstName,this.lastName,this.email,this.phoneNumber);
       } else {
         console.log(response.error.message);
@@ -160,23 +159,19 @@ export class PaiementFormComponent {
     console.log(token);
     const bodyData = {
       "token": token,
-      "amount":"10",
       "firstName": firstName,
       "lastName": lastName,
       "email": email,
       "phone": phone
     }
-    this.paymentService.chargeCard(bodyData).subscribe(
+    this.paymentService.chargeCard(bodyData,2).subscribe(
       response => {
         this.paymentStatus=response;
         console.log(this.paymentStatus);
         this.paymentService.updatePaymentStatus(this.paymentStatus);
-        this.pymentDetails=new PaymentDetails(Math.floor(Math.random() * 1000),this.firstName,this.lastName,this.email,this.cardNumber.substring(14,16),10);
-        this.paymentService.paymentDetails=this.pymentDetails;
         },
       error => {
         console.error('Erreur lors du traitement du paiement :', error);
-        this.paymentStatus = 'Une erreur est survenue lors du traitement du paiement.';
         this.paymentService.updatePaymentStatus(this.paymentStatus);
       }
     );

@@ -66,7 +66,8 @@ constructor(private  activityService : ActivityService , private cartService:Car
     this.cartService.addToCart(activityId, userId, nbr).subscribe(() => {
       // Réussite de la requête, exécutez ici des actions après l'ajout au panier
       console.log('Élément ajouté au panier avec succès');
-    }, error => {
+      this.cartService.incrementElementCount();
+      }, error => {
       console.error('Une erreur s\'est produite lors de l\'ajout au panier :', error);
       // Gérez les erreurs ici
     });

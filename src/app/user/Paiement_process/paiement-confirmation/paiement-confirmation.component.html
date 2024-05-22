@@ -30,7 +30,7 @@
             </div>
             <!-- step three form html start -->
             <div class="confirmation-outer">
-                <div class="success-notify" *ngIf="paymentState()">
+                <div class="success-notify" *ngIf="paymentStatus">
                     <div class="success-icon">
                         <i class="fas fa-check"></i>
                     </div>
@@ -39,7 +39,7 @@
                         <p>Thank you, your payment has been successful and your booking is now confirmed.A confirmation email has been sent to <a href="https://demo.bosathemes.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f060109002f1b1d0e190a030a410c0002">[email&#160;protected]</a>.</p>
                     </div>
                 </div>
-              <div class="failure-notify" *ngIf="!paymentState()">
+              <div class="failure-notify" *ngIf="!paymentStatus">
                 <div class="failure-icon">
 <!--                  <i class="fa-light fa-circle-xmark"></i>-->
                 </div>
@@ -49,7 +49,7 @@
                   <button (click)="goBack()" >Try Again</button>
                 </div>
               </div>
-                <div class="confirmation-inner" *ngIf="paymentState()">
+                <div class="confirmation-inner" *ngIf="paymentStatus">
                     <div class="row">
                         <div class="col-lg-11 mx-auto">
                             <div class="confirmation-details">
@@ -58,7 +58,7 @@
                                     <tbody>
                                     <tr>
                                         <td>Booking id:</td>
-                                        <td>{{paymentInformation.id}}</td>
+                                        <td>Order_Id{{paymentInformation.id}}</td>
                                     </tr>
                                     <tr>
                                         <td>First Name:</td>
@@ -74,7 +74,7 @@
                                     </tr>
                                     <tr>
                                         <td>Card number</td>
-                                        <td>XXXX-XXXX-XXXX-XX{{paymentInformation.cardNumber}}</td>
+                                        <td>XXXX-XXXX-XXXX-XX42</td>
                                     </tr>
 
                                     </tbody>

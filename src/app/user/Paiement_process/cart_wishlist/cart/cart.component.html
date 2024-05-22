@@ -45,7 +45,6 @@
                             <tbody>
                             <tr *ngFor="let element of cart.cartElements ; let i = index">
                                 <td class="">
-                                    <button class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                                     <span class="cartImage"><img src="" alt="image"></span>
                                 </td>
                                 <td data-column="Product Name">{{element.activity.designation}}</td>
@@ -59,23 +58,14 @@
 <!--                                    </div>-->
 <!--                                </td>-->
                                 <td data-column="Sub Total">{{element.sub_total}} MAD</td>
+                              <td><button (click)="deleteFromCart(element,cart)" class="close" data-dismiss="alert"  aria-label="Close"><span aria-hidden="true">×</span></button></td>
                             </tr>
                             </tbody>
 
                         </table>
                     </div>
-
-<!--                    <div class="updateArea">-->
-<!--                        <div class="input-group">-->
-<!--                            <input type="text" class="form-control" placeholder="I have a discount coupon">-->
-<!--                            <a href="#" class="outline-primary">apply coupon</a>-->
-<!--                        </div>-->
-<!--                        <a href="#" class="outline-primary update-btn">update cart</a>-->
-<!--                    </div>-->
                     <div class="totalAmountArea">
                         <ul class="list-unstyled">
-<!--                            <li><strong>Sub Total</strong> <span>$ 3400.00</span></li>-->
-<!--                            <li><strong>Vat</strong> <span>$ 18.00</span></li>-->
                             <li><strong>Grand Total</strong> <span class="grandTotal">{{cart.total_amount}}</span></li>
                         </ul>
                     </div>
@@ -84,7 +74,6 @@
                     </div>
                 </form>
             </div>
-            <!-- step one form html end -->
         </div>
     </div>
 </main>

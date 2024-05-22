@@ -10,7 +10,7 @@ import {PaymentService} from "../../../../service/payment/payment.service";
 })
 export class PaiementConfirmationComponent implements OnInit, OnDestroy {
 
-  paymentStatus!: string;
+  paymentStatus!: boolean;
   paymentInformation !: PaymentDetails;
 
 
@@ -19,19 +19,23 @@ export class PaiementConfirmationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.paymentStatus = data['state']; // state est le nom que vous avez donné dans la définition de la route
-      this.paymentInformation=this.paymentService.paymentDetails;
+      console.log(this.paymentStatus);
+      this.getPaymentInformation(2);
+
     });
   }
   goBack(): void {
     window.history.back();
   }
 
-  paymentState():boolean{
-    if(this.paymentStatus ==="true")
-      return true;
-    else
-      return false;
+  getPaymentInformation(userId :number):void{
+    this.paymentService.getPaymentInformation(userId)
+      .subscribe(paymentDetails=> {
+        this.paymentInformation = paymentDetails;
+        console.log(paymentDetails);
+      });
   }
+
 
   ngOnDestroy() {
   }
