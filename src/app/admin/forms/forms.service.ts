@@ -13,6 +13,7 @@ export class FormsService {
   activityForm: FormGroup;
   passwordConfirmation: FormGroup;
   programelementform: FormGroup;
+  resetPasswordForm: FormGroup;
   constructor(private formBuilder: FormBuilder) {
     // logging form //
     this.loginForm = this.formBuilder.group({
@@ -92,6 +93,13 @@ export class FormsService {
       {
         name: ['', Validators.required],
         dscription: ['', Validators.required],
+      }
+    )
+
+    this.resetPasswordForm = this.formBuilder.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        newPassword: ['', [Validators.required, passwordValidator]],
       }
     )
   }

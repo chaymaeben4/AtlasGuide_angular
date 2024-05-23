@@ -1,3 +1,2 @@
-<app-sidebar [hidden]="!this.filterService.roleFilter('ROLE_CONTENT_MANAGER') || isHomePage()" />
-<app-user-sidebar  [hidden]="!this.filterService.roleFilter('ROLE_USER')" />
+<app-sidebar [hidden]="isHomePage()" />
 <router-outlet/>

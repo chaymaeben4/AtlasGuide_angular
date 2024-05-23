@@ -28,22 +28,22 @@ export class SidebarComponent implements OnInit {
   hide() {
     const elements = document.getElementsByClassName('dashboard-navigation');
     const containerWrapper = document.getElementsByClassName('dashboard-container');
-    const content_body = document.getElementsByClassName('dashboard-container');
+    //const content_body = document.getElementsByClassName('dashboard-container');
     if (elements.length > 0) {
       if (this.hid1) {
         elements[0].classList.add('slide-in');
         elements[0].classList.remove('slide-out');
         containerWrapper[0].classList.add('slide-in1');
         containerWrapper[0].classList.remove('slide-out1');
-        content_body[0].classList.add('slide-in2')
-        content_body[0].classList.remove('slide-out2');
+       // content_body[0].classList.add('slide-in2')
+        //content_body[0].classList.remove('slide-out2');
       } else {
         elements[0].classList.add('slide-out');
         elements[0].classList.remove('slide-in');
         containerWrapper[0].classList.add('slide-out1');
         containerWrapper[0].classList.remove('slide-in1');
-        content_body[0].classList.add('slide-out2')
-        content_body[0].classList.remove('slide-in2');
+        //content_body[0].classList.add('slide-out2')
+        //content_body[0].classList.remove('slide-in2');
       }
     }
     this.hid1=!this.hid1;

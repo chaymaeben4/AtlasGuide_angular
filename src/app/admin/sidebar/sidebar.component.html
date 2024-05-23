@@ -1,4 +1,4 @@
-<div  [hidden]="!this.filterService.roleFilter('ROLE_CONTENT_MANAGER')"  class="dashboard-header sticky-header">
+<div   class="dashboard-header sticky-header">
   <div class="content-left  logo-section pull-left">
     <h1>
       <a routerLink="/dashboard">
@@ -130,13 +130,14 @@
   </div>
 </div>
 
-<div [hidden]="!this.filterService.roleFilter('ROLE_CONTENT_MANAGER')"  style="display: flex;">
+<div  style="display: flex;">
   <div   class="dashboard-navigation">
 
-<div id="dashboard-Navigation" class="slick-nav"></div>
-<div id="navigation" class="navigation-container" >
-  <ul>
-    <li>
+    <!-- Responsive Navigation Trigger -->
+    <div id="dashboard-Navigation" class="slick-nav"></div>
+    <div id="navigation" class="navigation-container" >
+      <ul>
+        <li>
           <span [hidden]="hid1" (click)="hide();"
                 style="
           display: flex;
@@ -146,8 +147,8 @@
           z-index: 99999999999999999;">
             <img src="assets/img/closenve/next_7735582.png" style="width: 23px;height: 23px;" alt/>
           </span>
-      <span [hidden]="hid2" (click)="hide();"
-            style="
+          <span [hidden]="hid2" (click)="hide();"
+                style="
           display: flex;
           position: absolute;
           right: 1%;
@@ -155,36 +156,36 @@
           z-index: 99999999999999999;">
           <img src="assets/img/closenve/back-arrows_7735576.png" style="width: 23px;height:23px;"  alt/>
         </span>
-    </li>
+        </li>
 
-  </ul>
-  <ul>
-    <li class="active-menu"><a routerLink="/dashboard">
-      <i class="far fa-chart-bar"></i>
-      Dashboard
+      </ul>
+      <ul>
+        <li *ngIf="this.filterService.roleFilter('ROLE_CONTENT_MANAGER')" class="active-menu"><a routerLink="/dashboard">
+          <i class="far fa-chart-bar"></i>
+          Dashboard
+        </a></li>
+        <li *ngIf="this.filterService.roleFilter('ROLE_CONTENT_MANAGER')"><a routerLink="/createActivity"><i class="fas fa-umbrella-beach"></i>Add Activity</a></li>
+        <li *ngIf="this.filterService.roleFilter('ROLE_CONTENT_MANAGER')" (click)="onActivitiesClick()"  >
+          <a routerLink="/activities">
+            <i class="fas fa-hotel"></i>
+            Activities
+            <span [hidden]="isActivitiesClicked" style="float: right;font-size: 20px;">+</span>
+            <span [hidden]="!isActivitiesClicked" style="float: right;font-size: 25px;">-</span>
+          </a>
+        </li>
+        <li  *ngIf="this.filterService.roleFilter('ROLE_CONTENT_MANAGER')"><a href="db-booking.html"><i class="fas fa-ticket-alt"></i> Booking & Enquiry</a></li>
+        <li  *ngIf="this.filterService.roleFilter('ROLE_USER')"><a href="db-booking.html"><i class="fas fa-ticket-alt"></i> My Bookings</a></li>
+        <li  *ngIf="this.filterService.roleFilter('ROLE_USER')"><a href="db-booking.html"><i class="far fa-heart"></i> My Wishlist</a></li>
+        <li  *ngIf="this.filterService.roleFilter('ROLE_USER')"><a href="db-booking.html"><i class="fas fa-paypal"></i> My Payment Details</a></li>
+        <li><a *ngIf="this.filterService.roleFilter('ROLE_USER')" routerLink="/comments" ><i class="fas fa-comments"></i>Comments </a><span  class="notify1" >3</span>
 
-    </a></li>
-    <li><a routerLink="/createActivity"><i class="fas fa-umbrella-beach"></i>Add Activity</a></li>
-    <li (click)="onActivitiesClick()"  >
-      <a routerLink="/activities">
-        <i class="fas fa-hotel"></i>
-        Activities
-        <span [hidden]="isActivitiesClicked" style="float: right;font-size: 20px;">+</span>
-        <span [hidden]="!isActivitiesClicked" style="float: right;font-size: 25px;">-</span>
-      </a>
-    </li>
+        <li *ngIf="this.filterService.roleFilter('ROLE_CONTENT_MANAGER')"><a routerLink="/wishlist" ><i class="far fa-heart"></i>Wishlist</a></li>
+        <li *ngIf="this.filterService.roleFilter('ROLE_CONTENT_MANAGER')"><a routerLink="/comments" ><i class="fas fa-comments"></i>Comments </a><span  class="notify1" >3</span>
+        </li>
+        <li><a (click)="navigator.logout()" href=""><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+      </ul>
+    </div>
+  </div>
 
-    <li><a href="db-booking.html"><i class="fas fa-ticket-alt"></i> Booking & Enquiry</a></li>
-    <li><a routerLink="/wishlist" ><i class="far fa-heart"></i>Wishlist</a></li>
-    <li><a routerLink="/comments" ><i class="fas fa-comments"></i>Comments </a><span  class="notify1" >3</span>
-    </li>
-    <li><a (click)="navigator.logout()" href=""><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-  </ul>
 </div>
-
-</div>
-
-</div>
-
-
 

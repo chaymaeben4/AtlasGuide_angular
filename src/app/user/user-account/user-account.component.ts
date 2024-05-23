@@ -4,7 +4,7 @@ import {User} from "../../models/User";
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
-  styleUrl: "../../.././assets/css/main.css"
+  styleUrl: "./user-account.component.css"
 })
 export class UserAccountComponent implements OnInit{
   user!: User;
