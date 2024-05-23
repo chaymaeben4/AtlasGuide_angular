@@ -17,7 +17,7 @@ import {User} from "../../models/User";
 export class ActivityService {
 
   data!: Activity[];
-  private activityYRL = environnment.adminURL + "/activities";
+  private activityYRL = environnment.authURL+ "/activities";
 
   constructor(
     private http: HttpClient,
@@ -37,7 +37,7 @@ export class ActivityService {
   getAgencyActivitiesById(agenceId: number): Observable<Activity[]>  {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + this.sessionService.getSessionData('user').token);
-    return this.http.get<ActivityDto[]>('http://localhost:8080/CityThrillsMorocco/Admin/activities/agence/'+agenceId, {headers }).pipe(
+    return this.http.get<ActivityDto[]>(this.activityYRL+'/agence/'+agenceId, {headers }).pipe(
       map(activities => activities.map(activity => {
         return this.convertToActivity(activity)
       }))
@@ -73,7 +73,7 @@ export class ActivityService {
   }
 
   deleteActivity(id: number): Observable<any> {
-    return this.http.delete<void>('http://localhost:8080/CityThrillsMorocco/Admin/activities/'+id);
+    return this.http.delete<void>(this.activityYRL+'/'+id);
   }
 
   private convertToActivity(activity: ActivityDto): Activity{
@@ -100,6 +100,5 @@ export class ActivityService {
       program: activity.program
     };
   }
-
 
 }

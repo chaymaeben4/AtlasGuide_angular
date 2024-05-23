@@ -73,7 +73,7 @@ export class AccountComponent implements OnInit{
   }
 
   deleteAccount(){
-    this.authService.deleteAccount().subscribe(
+    this.accountService.deleteAccount().subscribe(
       messages => {
         console.log(JSON.stringify(messages));
       },
