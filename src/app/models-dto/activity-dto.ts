@@ -1,5 +1,6 @@
 import {Reservation} from "../models/Reservation";
 import {Agence} from "../models/Agence";
+import {Program} from "../models/Program";
 
 export class ActivityDto {
   id: number;
@@ -18,7 +19,7 @@ export class ActivityDto {
   isFlexibleDates: boolean;
   isPlacesLimited: boolean;
   agence: Agence;
-
+  program!: Program;
   status: string;
   bookingStartDate: Date;
   bookingEndDate: Date;

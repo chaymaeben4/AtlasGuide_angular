@@ -27,12 +27,14 @@ import {CloudinaryModule} from '@cloudinary/ng';
 >>>>>>> 0a85a0881bffb3d4f83cde3a3d5ecfbf19e14426
 
 
+
 // @ts-ignore
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
     SwaggerComponent,
+
   ],
   imports: [
     GoogleMapsModule,

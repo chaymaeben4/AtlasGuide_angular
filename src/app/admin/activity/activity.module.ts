@@ -37,6 +37,7 @@ import {GoogleMapsModule} from "@angular/google-maps";
 import {YouTubePlayerModule} from "@angular/youtube-player";
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatStepperModule} from "@angular/material/stepper";
+import {ProgramComponent} from './program/program.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import {MatStepperModule} from "@angular/material/stepper";
     ActivityShowComponent,
     ActivityDetailComponent,
     ActivitiesComponent,
+    ProgramComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
     imports: [

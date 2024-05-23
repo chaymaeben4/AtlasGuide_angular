@@ -1,3 +1,5 @@
+import {User} from "../models/User";
+
 export class AgenceDto {
   id: number;
   name: string;
@@ -5,6 +7,7 @@ export class AgenceDto {
   email: string;
   phone: string;
   password: string;
+  user!: User
   constructor(
     id: number,
     name: string,

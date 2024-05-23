@@ -66,21 +66,21 @@ export class AlertsService {
     }
   }
 
-  updateAlert(httpCode: number){
-    if(httpCode === 201){
+  updateAlert(httpmessage: string){
+
       Swal.fire(
         {
-          title: 'Activity Updated Successfully .',
+          title: httpmessage,
           icon: 'success',
           width: '400px',
           showConfirmButton: false,
-          timer: 400000,
+          timer: 40000,
           timerProgressBar: true,
           customClass: {
             popup: 'alert alert-success active-popup',
           }
         });
-    }
+
   }
 
   activityAlert(httpCode: number){
@@ -109,5 +109,18 @@ export class AlertsService {
         });
     }
 
+  }
+
+  deleteAlert() {
+    Swal.fire(
+      {
+        title: 'Delete Pending',
+        icon: 'warning',
+        width: '400px',
+        showConfirmButton: false,
+        customClass: {
+          popup: 'alert alert-warning'
+        }
+      });
   }
 }

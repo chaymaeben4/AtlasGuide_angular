@@ -14,11 +14,12 @@ mat-form-field {
 }
 
 #fileInput {
-  position: absolute;
+
   cursor: pointer;
   z-index: 10;
-  opacity: 0;
-  height: 100%;
+  opacity: 0.8;
+  width: 50%;
+  height: 10%;
   left: 0px;
   top: 0px;
 }
@@ -124,3 +125,4 @@ mat-form-field {
     height: 200px;
   }
 }
+

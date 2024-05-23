@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
-import {ProductViewService} from "../../products/product-view/product-view.service";
+
 
 @Component({
   selector: 'app-comment-show',
@@ -13,7 +13,7 @@ export class CommentShowComponent implements OnDestroy, OnInit  {
   name = '';
   private productSub = new Subject<void>();
 
-  constructor(private productviewService: ProductViewService) { }
+  constructor() { }
 
   ngOnDestroy(): void {
     this.productSub.next();
@@ -25,12 +25,6 @@ export class CommentShowComponent implements OnDestroy, OnInit  {
   }
 
   private getProduct() {
-    this.productviewService.getProduct(this.id).pipe(
-      takeUntil(this.productSub)
-    ).subscribe(product => {
-      if (product) {
-        this.name = product.name;
-      }
-    });
+
   }
 }

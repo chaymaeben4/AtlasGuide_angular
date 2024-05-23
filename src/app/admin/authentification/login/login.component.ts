@@ -14,7 +14,7 @@ import {FormsService} from "../../forms/forms.service";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../../../../style_admin.css']
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
     if (this.loginForm.invalid) {
@@ -49,8 +50,10 @@ export class LoginComponent implements OnInit {
           {
             token: this.token,
             Uid: response.id,
-            role: response.role
+            role: response.role,
+            inAccount: true
           });
+        console.log(response.id)
         this.navigator.login_navigator(response.role.name);
       },
       error => this.alerts.loginAlerts(error.status)

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivityService} from "../activity.service";
 import {map, Observable, startWith} from "rxjs";
 import {Activity} from "../../../models/Activity";
@@ -12,7 +12,10 @@ import {AlertsService} from "../../alerts/alerts.service";
 import {ActivityCategories} from "../../enumerations/activity-categories";
 import {SessionService} from "../../session.service";
 import { NgxImageCompressService } from 'ngx-image-compress';
-import {AwsSdkService} from "../../aws-sdk/aws-sdk.service";
+import {StoreImagesService} from "../../../storeImages/store-images.service";
+import {ProgramElement} from "../../../models/ProgramElement";
+import {Program} from "../../../models/Program";
+import {FiltersService} from "../../filter/filters.service";
 @Component({
   selector: 'app-activity-create',
   templateUrl: './activity-create.component.html',
@@ -21,29 +24,48 @@ import {AwsSdkService} from "../../aws-sdk/aws-sdk.service";
 
 
 export class ActivityCreateComponent implements OnInit {
-  selectedCityIframeSrc!: SafeResourceUrl;
-  selectedFile: File | null = null;
-  currentFile?: File;
+  selectedProduct = '';
+  imageUrl: string = "assets/images/profile/cover.jpg";
+  selectedFile!: File;
   progress = 0;
   message = '';
   fileName = 'Select File';
+  numberOfDays: number = 0;
+  programElements: ProgramElement[] = [];
+  program: Program;
+  constructor(private activityService: ActivityService,
+              private AuthenticatinService: AuthentificationService,
+              private sessionService: SessionService,
+              protected googleMapService: GoogleMapsService,
+              private alertService: AlertsService,
+              private imageCompress: NgxImageCompressService,
+              private storimages: StoreImagesService,
+              protected filterService: FiltersService
+  ) {
+    this.program = new Program(1, 'Example Program', 'This is an example program description');
+  }
 
-  selectFile(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      const file: File = event.target.files[0];
-      this.currentFile = file;
-      this.fileName = this.currentFile.name;
-    } else {
-      this.fileName = 'Select File';
+  setNumberOfDays(event: any) {
+    this.numberOfDays = event.value;
+    this.programElements = [];
+    for (let i = 0; i < this.numberOfDays; i++) {
+      this.programElements.push(new ProgramElement(i, '', ''));
     }
   }
+
+  saveProgram() {
+    this.program.numberOfDays = this.numberOfDays;
+    this.program.programElements = this.programElements;
+    // Save the program, e.g., send it to a server
+    console.log('Program saved', this.program);
+  }
+
   onFileSelected(event: Event) {
     const target = event.target as HTMLInputElement;
     if (target.files && target.files.length > 0) {
       this.selectedFile = target.files[0] as File;
       const formData = new FormData();
       formData.append('image', this.selectedFile);
-
       this.selectedFileName = this.selectedFile.name;
 
     }
@@ -60,29 +82,11 @@ export class ActivityCreateComponent implements OnInit {
   unsafeUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14131401.081666416!2d-27.633198336256214!3d30.150012426714188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b88619651c58d%3A0xd9d39381c42cffc3!2sMaroc!5e0!3m2!1sfr!2sma!4v1715315794985!5m2!1sfr!2sma';
   safeUrl: SafeResourceUrl = this.googleMapService.sanitizer.bypassSecurityTrustResourceUrl(this.unsafeUrl);
 
-  constructor(private activityService: ActivityService,
-              private AuthenticatinService: AuthentificationService,
-              private sessionService: SessionService,
-              protected googleMapService: GoogleMapsService,
-              private alertService: AlertsService,
-              private imageCompress: NgxImageCompressService,
-              private awsService: AwsSdkService,
-  ) {
-  }
 
-  uploadImage() {
-    if (!this.selectedFile) {
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('image', this.selectedFile);
-    this.awsService.uploadFile(this.selectedFile,"first-project",'/pfsfiles/'+this.selectedFile.name);
-
-  }
 
   ngOnInit(): void {
-    this.activities = this.activityService.connect();
+
+
     this.filteredCities = this.city.valueChanges.pipe(
       startWith(''),
       map(value => this.filterCities(value))
@@ -232,6 +236,7 @@ export class ActivityCreateComponent implements OnInit {
 
 
   selectedFileName: string | undefined;
+  days = [1,2,3,4];
 
 
   filterCities(value: string): City[] {
@@ -240,35 +245,50 @@ export class ActivityCreateComponent implements OnInit {
   }
 
   createActivity() {
+
     this.err = JSON.parse(JSON.stringify(this.category.value));
-    this.activityService.addActivity(<Activity>{
-      id: 1,
-      designation: this.designation.value,
-      description: this.description.value,
-      startDate: this.startDate.value,
-      endDate: this.endDate.value,
-      price: Number(this.price.value),
-      category: this.err.at(0),
-      descriptionDetail: this.descriptionDetail.value,
-      location: '',
-      imageUrl: this.filename,
-      maxParticipants: this.maxParticipants.value,
-      participants: this.participants.value,
-      isAvailableYearRound: this.isAvailableYearRound.value,
-      isFlexibleDates: this.isFlexibleDates.value,
-      isPlacesLimited: this.isPlacesLimited.value,
-      bookingStartDate: this.bookingStartDate.value,
-      bookingEndDate: this.bookingEndDate.value,
-      city: this.city.value,
-    },this.sessionService.getSessionData('user').agence.Uid).subscribe(
-      activity => {
-        this.activityForm.reset();
-        this.added.emit(activity);
-      },
-      error => {
-        this.alertService.activityAlert(error.status);
+    this.storimages.uploadFile(this.selectedFile).subscribe(
+      message => {
+        this.program.numberOfDays = this.numberOfDays;
+        this.program.programElements = this.programElements;
+        // Save the program, e.g., send it to a server
+        console.log('Program saved', this.program);
+        this.activityService.addActivity(<Activity>{
+          id: 1,
+          designation: this.designation.value,
+          description: this.description.value,
+          startDate: this.startDate.value,
+          endDate: this.endDate.value,
+          price: Number(this.price.value),
+          category: this.err.at(0),
+          descriptionDetail: this.descriptionDetail.value,
+          location: '',
+          imageUrl: message,
+          maxParticipants: this.maxParticipants.value,
+          participants: this.participants.value,
+          isAvailableYearRound: this.isAvailableYearRound.value,
+          isFlexibleDates: this.isFlexibleDates.value,
+          isPlacesLimited: this.isPlacesLimited.value,
+          bookingStartDate: this.bookingStartDate.value,
+          bookingEndDate: this.bookingEndDate.value,
+          city: this.city.value,
+          program: this.program
+        },this.sessionService.getSessionData('user').Uid).subscribe(
+          activity => {
+            this.activityForm.reset();
+            this.added.emit(activity);
+          },
+          error => {
+            this.alertService.activityAlert(error.status);
+          }
+        )
+
       }
+
     )
+
+
+
   }
 
 
@@ -276,16 +296,8 @@ export class ActivityCreateComponent implements OnInit {
     this.safeUrl = this.googleMapService.updateMap(this.city.value)
   }
 
-  public imageUrl: string="/assets/img/avatars/drag-drop_8202936.png";
-
-  public loadImage(imageName: string): void {
-    this.activityService.loadImage(imageName).subscribe(
-      image => this.imageUrl = image
-    )
-  }
   onCityChange(event: any)  {
     this.safeUrl = this.googleMapService.updateMap(event.value)
   }
-
 
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SessionService} from "../session.service";
 import {Router} from "@angular/router";
+import {FiltersService} from "../filter/filters.service";
 
 @Component({
   selector: 'app-dashbord',
@@ -8,8 +9,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./dashbord.component.css']
 })
 export class DashbordComponent implements  OnInit {
-  constructor(private sessionService: SessionService,
-             private  router: Router,) {}
+  constructor(
+    private sessionService: SessionService,
+    private  router: Router,
+    protected filterService: FiltersService) {}
 
   ngOnInit() {
 

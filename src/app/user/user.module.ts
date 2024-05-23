@@ -22,12 +22,13 @@ import {UserRoutingModule} from "./user-routing.module";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {ActivitesByCityComponent} from "./activites-by-city/activites-by-city.component";
 import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { UserAccountComponent } from './user-account/user-account.component';
+import { BookingComponent } from './user-account/booking/booking.component';
 
 
 
@@ -55,6 +56,7 @@ import { UserAccountComponent } from './user-account/user-account.component';
       ActivitesByCityComponent,
       UserSidebarComponent,
       UserAccountComponent,
+      BookingComponent,
     ],
     imports: [
         CommonModule,
@@ -63,7 +65,8 @@ import { UserAccountComponent } from './user-account/user-account.component';
         HttpClientModule,
         FormsModule,
         MatSlideToggleModule,
-        SlickCarouselModule
+        SlickCarouselModule,
+        ReactiveFormsModule
     ],
     providers: [
         provideAnimationsAsync()
