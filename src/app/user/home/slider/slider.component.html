@@ -13,14 +13,16 @@
                     </div>
                 </div>
                 <div class="overlay"></div>
-                <ul class="de_nav de_nav_dark " #stickyMenu [class.sticky] = "sticky" >
+                <ul class="de_nav de_nav_dark" >
                     <button data-link="#section-services-tab" [ngClass]="{'active': index === 0}" (click)="onSetIndex(0)"><h2>For you</h2></button>
                     <button data-link="#section-services-tab" [ngClass]="{'active': index === 1}" (click)="onSetIndex(1)"><h2>Culture</h2></button>
                     <button data-link="#section-services-tab" [ngClass]="{'active': index === 2}" (click)="onSetIndex(2)"><h2>Nature</h2></button>
                     <button data-link="#section-services-tab" [ngClass]="{'active': index === 3}" (click)="onSetIndex(3)"><h2>Sport</h2></button>
                     <button data-link="#section-services-tab" [ngClass]="{'active': index === 4}" (click)="onSetIndex(4)"><h2>Food</h2></button>
                 </ul>
+
             </div>
+<!--            <app-top-activities [selectedCategory]="selectedCategory"></app-top-activities>-->
 
         </div>
 
@@ -28,3 +30,74 @@
 
 
 <span *ngFor="let img of photos" [style.background]="img"></span>
+
+<section class="package-section">
+    <div class="container">
+        <div class="section-heading">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <h5 class="dash-style">EXPLORE GREAT PLACES</h5>
+                    <h2>Unforgettable experiences</h2>
+                </div>
+            </div>
+        </div>
+        <div class="package-inner">
+            <div class="row">
+                <div class="col-lg-4 col-md-6" *ngFor="let activity of activities; let i = index">
+                    <div class="package-wrap">
+                        <figure class="feature-image">
+                            <a routerLink="/Details">
+                                <img src="{{activity.imageUrl}}" alt="">
+                            </a>
+                        </figure>
+                        <div class="package-price">
+                            <h6>
+                                <span>{{activity.price}}$</span> / per person
+                            </h6>
+                        </div>
+                        <div class="package-content-wrap">
+                            <div class="package-meta text-center">
+                                <ul>
+                                    <li>
+                                        <i class="far fa-clock"></i>
+                                        {{activity.starteddate}}
+                                    </li>
+                                    <li>
+                                        <i class="bi bi-building"></i>
+                                        {{activity.city}}
+                                    </li>
+                                    <li>
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        {{activity.location}}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="package-content">
+                                <h3>
+                                    <a [routerLink]="['/Details', activity.id]">{{activity.designation}}</a>
+                                </h3>
+                                <div class="review-area">
+                                    <span class="review-text">({{numberOfComments[i]}} reviews)</span>
+                                    <div class="rating-start" title="Rated {{averageNotes[i]}} out of 5">
+                                        <span style="width: {{averageNotes[i] * 20}}%"></span>
+                                    </div>
+                                </div>
+                                <p>{{activity.description}}</p>
+                                <div class="btn-wrap">
+                                    <a  routerLink="/Cart" class="button-text width-6">Add To Cart<i class="fas fa-arrow-right"></i></a>
+                                    <a  (click)="addToWishlist(activity.id)"
+                                        [ngClass]="{'button-text': true, 'width-6': true, 'wishlist-added': wishlistStatuses[activity.id]}"
+                                        [innerHTML]="wishlistStatuses[activity.id] ? 'Wish List <i class=\'fas fa-heart\'></i>' : 'Wish List<i class=\'far fa-heart\'></i>'">
+                                        Wish List</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

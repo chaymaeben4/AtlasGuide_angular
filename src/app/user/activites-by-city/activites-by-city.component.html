@@ -7,6 +7,102 @@
             </div>
         </div>
     </div>
+    <div class="inner-shape" style='background-image: url("assets/images/slider-pattern.png")'></div>
 </section>
+
+<div class="container_search">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" [(ngModel)]="searchText" (input)="filterCities()" (keydown)="onKeyDown($event)" placeholder="Your destination...">
+    <button class="search" >Search</button>
+    <ul *ngIf="filteredCities.length > 0" class="suggestions">
+        <li *ngFor="let city of filteredCities; let i = index"
+            [class.selected]="selectedIndex === i"
+            (click)="selectCity(city)"
+            (mouseenter)="selectedIndex = i">
+            {{ city }}
+        </li>
+    </ul>
+</div>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+<div class="container_Category">
+    <div class = "card" *ngFor="let category of categories">
+        <img [src]="getCategoryPhoto(category)"  alt="">
+        <div class="card-content">
+            <h2>
+                {{category}}
+            </h2>
+            <p>
+                {{getCategoryDescription(category)}}
+            </p>
+            <a  class="button" (click)="findActivitiesByCityAndCategory(category)">
+                Find out more
+                <span class="material-symbols-outlined">
+          arrow_right_alt
+        </span>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="package-inner">
+    <div class="row">
+        <div class="col-lg-4 col-md-6" *ngFor="let activity of activities; let i = index">
+            <div class="package-wrap">
+                <figure class="feature-image">
+                    <a routerLink="/Details">
+                        <img src="{{activity.imageUrl}}" alt="">
+                    </a>
+                </figure>
+                <div class="package-price">
+                    <h6>
+                        <span>{{activity.price}}$</span> / per person
+                    </h6>
+                </div>
+                <div class="package-content-wrap">
+                    <div class="package-meta text-center">
+                        <ul>
+                            <li>
+                                <i class="far fa-clock"></i>
+                                {{activity.starteddate}}
+                            </li>
+                            <li>
+                                <i class="bi bi-building"></i>
+                                {{activity.city}}
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                {{activity.location}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="package-content">
+                        <h3>
+                            <a [routerLink]="['/Details', activity.id]">{{activity.designation}}</a>
+                        </h3>
+                        <div class="review-area">
+                            <span class="review-text">({{numberOfComments[i]}} reviews)</span>
+                            <div class="rating-start" title="Rated {{averageNotes[i]}} out of 5">
+                                <span style="width: {{averageNotes[i] * 20}}%"></span>
+                            </div>
+                        </div>
+                        <p>{{activity.description}}</p>
+                        <div class="btn-wrap">
+                            <a  routerLink="/Cart" class="button-text width-6">Add To Cart<i class="fas fa-arrow-right"></i></a>
+                            <a  (click)="addToWishlist(activity.id)"
+                                [ngClass]="{'button-text': true, 'width-6': true, 'wishlist-added': wishlistStatuses[activity.id]}"
+                                [innerHTML]="wishlistStatuses[activity.id] ? 'Wish List <i class=\'fas fa-heart\'></i>' : 'Wish List<i class=\'far fa-heart\'></i>'">
+                                Wish List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <app-footer></app-footer>

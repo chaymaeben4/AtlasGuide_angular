@@ -8,6 +8,7 @@ import {CartComponent} from "./Paiement_process/cart_wishlist/cart/cart.componen
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "../admin/authentification/login/login.component";
 import {RegisterComponent} from "../admin/authentification/register/register.component";
+import {ActivitesByCityComponent} from "./activites-by-city/activites-by-city.component";
 import {UserAccountComponent} from "./user-account/user-account.component";
 
 
@@ -19,8 +20,11 @@ const routes: Routes = [
   {path:'paiement' , component : PaiementFormComponent},
   {path:'confirmation' , component : PaiementConfirmationComponent},
   {path:'wishlist' , component : WishlistComponent},
-  {path: 'UserAccount' , component : UserAccountComponent},
   {path:'Details/:id' , component : ActivityDetailsComponent},
+  {path:'Details' , component : ActivityDetailsComponent},
+  {path: 'UserAccount' , component : UserAccountComponent},
+  {path:'activities/:city' , component : ActivitesByCityComponent}
+
 ];
 
 @NgModule({

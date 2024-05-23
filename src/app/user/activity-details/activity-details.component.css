@@ -2,3 +2,31 @@
     width: 650px;
     height: 500px;
 }
+.section-heading{
+    margin-bottom: 80px;
+}
+.form_comment{
+    margin-top: -50px;
+}
+h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #101F46;
+    font-family: "Raleway", sans-serif;
+}
+.tab-pane{
+    width: 100%;
+    height: 30px;
+    align-items: center;
+}
+.summary-review{
+    margin-bottom: -50px;
+}
+.dash-style{
+    margin-top: 50px;
+}
+.testimonial-page-section .section-heading h2{
+    margin-bottom: -50px;
+}
+
+

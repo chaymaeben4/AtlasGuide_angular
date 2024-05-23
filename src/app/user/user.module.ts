@@ -15,46 +15,47 @@ import {LoginComponent} from "./supplier/login/login.component";
 import {FamousPlacesComponent} from "./home/famous-places/famous-places.component";
 import {FooterComponent} from "./shared/footer/footer.component";
 import {HeaderComponent} from "./shared/header/header.component";
-import {TopActivitiesComponent} from "./home/top-activities/top-activities.component";
 import {SliderComponent} from "./home/slider/slider.component";
 import {HomeComponent} from "./home/home.component";
 import {UserRoutingModule} from "./user-routing.module";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 import {BrowserModule} from "@angular/platform-browser";
+import {AppRoutingModule} from "../app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {SlickCarouselModule} from "ngx-slick-carousel";
 import {ActivitesByCityComponent} from "./activites-by-city/activites-by-city.component";
 import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { UserAccountComponent } from './user-account/user-account.component';
-
+import {StarRatingModule} from "angular-star-rating";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 
 @NgModule({
     declarations: [
-      HomeComponent,
-      SliderComponent,
-      TopActivitiesComponent,
-      HeaderComponent,
-      FooterComponent,
-      FamousPlacesComponent,
-      LoginComponent,
-      SignUpComponent,
-      CartComponent,
-      PaiementFormComponent,
-      PaiementConfirmationComponent,
-      WishlistComponent,
-      CitiesComponent,
-      CallbackComponent,
-      TestimonialComponent,
-      ActivityDetailsComponent,
-      BodyDetailsComponent,
-      DetailsHeaderComponent,
-      ActivitesByCityComponent,
-      UserSidebarComponent,
-      UserAccountComponent,
+        HomeComponent,
+        SliderComponent,
+        HeaderComponent,
+        FooterComponent,
+        FamousPlacesComponent,
+        LoginComponent,
+        SignUpComponent,
+        CartComponent,
+        PaiementFormComponent,
+        PaiementConfirmationComponent,
+        WishlistComponent,
+        CitiesComponent,
+        CallbackComponent,
+        TestimonialComponent,
+        ActivityDetailsComponent,
+        BodyDetailsComponent,
+        DetailsHeaderComponent,
+        ActivitesByCityComponent,
+        UserSidebarComponent,
+        UserAccountComponent,
+
     ],
     imports: [
         CommonModule,
@@ -63,14 +64,20 @@ import { UserAccountComponent } from './user-account/user-account.component';
         HttpClientModule,
         FormsModule,
         MatSlideToggleModule,
-        SlickCarouselModule
+        SlickCarouselModule,
+        StarRatingModule.forRoot(),
+        SlickCarouselModule,
+        ReactiveFormsModule,
+        NgxPaginationModule
+
     ],
     providers: [
         provideAnimationsAsync()
     ],
     exports: [
         FooterComponent,
-        UserSidebarComponent
+        UserSidebarComponent,
+        HeaderComponent
     ]
 })
 export class UserModule { }

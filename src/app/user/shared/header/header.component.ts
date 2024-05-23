@@ -1,30 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import { Router} from "@angular/router";
+import {City} from "../../../../model/enumeration/City.enum";
 
 
-enum City {
-  Agadir = 'Agadir',
-  AlHoceima = 'Al Hoceima',
-  Asilah = 'Asilah',
-  Casablanca = 'Casablanca',
-  Chefchaouen = 'Chefchaouen',
-  ElJadida = 'El Jadida',
-  Errachidia = 'Errachidia',
-  Essaouira = 'Essaouira',
-  Fes = 'Fes',
-  Ifrane = 'Ifrane',
-  Marrakech = 'Marrakech',
-  Meknes = 'Meknes',
-  Nador = 'Nador',
-  Ouarzazate = 'Ouarzazate',
-  Oujda = 'Oujda',
-  Rabat = 'Rabat',
-  Safi = 'Safi',
-  Tanger = 'Tanger',
-  Taroudant = 'Taroudant',
-  Tetouan = 'Tetouan',
-  Zagora = 'Zagora'
-}
+
 
 
 @Component({
@@ -32,9 +11,15 @@ enum City {
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit,AfterViewInit{
+
+  @ViewChild('stickyMenu') menuElement: ElementRef;
+  sticky: boolean = false;
+
 
   constructor(private router : Router ) {
+    this.menuElement = {} as ElementRef;
+
   }
 
   isHomepage : Boolean =false;
@@ -42,19 +27,32 @@ export class HeaderComponent implements OnInit{
   ngOnInit(){
     this.isHomepage=this.router.url==='/';
   }
-  public isLightTheme = true;
 
-  onThemeSwitchChange() {
-    this.isLightTheme = !this.isLightTheme;
 
-    document.body.setAttribute(
-        'data-theme',
-        this.isLightTheme ? 'light' : 'dark'
-    );
-  }
   cities = Object.values(City);
   searchText: string = "";
   filteredCities: string[] = [];
+
+
+
+  ngAfterViewInit() {
+
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  handleScroll() {
+    const windowScroll = window.pageYOffset;
+    if(windowScroll >= 100){
+      this.sticky=true;
+      console.log(windowScroll);
+
+    }
+    else{
+      this.sticky=false;
+      console.log(windowScroll);
+
+    }
+  }
 
   filterCities() {
     if (this.searchText) {
@@ -70,6 +68,24 @@ export class HeaderComponent implements OnInit{
   selectCity(city: string) {
     this.searchText = city;
     this.filteredCities = [];
+    this.router.navigate(['/activities', city]);
+  }
+
+  selectedIndex = -1;
+
+  onKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      this.selectedIndex = (this.selectedIndex + 1) % this.filteredCities.length;
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      this.selectedIndex = (this.selectedIndex - 1 + this.filteredCities.length) % this.filteredCities.length;
+    } else if (event.key === 'Enter') {
+      event.preventDefault();
+      if (this.selectedIndex !== -1) {
+        this.selectCity(this.filteredCities[this.selectedIndex]);
+      }
+    }
   }
 
 

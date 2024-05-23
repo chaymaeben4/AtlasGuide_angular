@@ -1,5 +1,5 @@
 
-<header id="masthead" class="site-header header-primary">
+<header id="masthead" class="site-header header-primary" #stickyMenu [class.sticky]="sticky">
     <!-- header html start -->
     <!--    <div class="top-header">-->
     <!--        <div class="container">-->
@@ -49,14 +49,21 @@
             </div>
 
             <!-- Recherche -->
-            <div class="container_search" *ngIf="isHomepage">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" [(ngModel)]="searchText" (input)="filterCities()" placeholder="Your destination">
-                <div class="search">Search</div>
-                <ul *ngIf="filteredCities.length > 0" class="suggestions">
-                    <li *ngFor="let city of filteredCities" (click)="selectCity(city)">{{ city }}</li>
-                </ul>
-            </div>
+
+                <div class="container_search" *ngIf="isHomepage">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" [(ngModel)]="searchText" (input)="filterCities()" (keydown)="onKeyDown($event)" placeholder="Your destination...">
+                    <div class="search">Search</div>
+                    <ul *ngIf="filteredCities.length > 0" class="suggestions">
+                        <li *ngFor="let city of filteredCities; let i = index"
+                            [class.selected]="selectedIndex === i"
+                            (click)="selectCity(city)"
+                            (mouseenter)="selectedIndex = i">
+                            {{ city }}
+                        </li>
+                    </ul>
+                </div>
+
 
 
 

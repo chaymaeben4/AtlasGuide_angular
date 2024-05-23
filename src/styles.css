@@ -1,4 +1,6 @@
 @charset "UTF-8";
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 
 @tailwind base;
 @tailwind components;
@@ -416,7 +418,7 @@ img {
 # Heading
 --------------------------------------------------------------*/
 h1, h2, h3, h4, h5, h6 {
-  color: #083294;
+  color: #101F46;
   font-family: "Raleway", sans-serif;
 }
 
@@ -2198,6 +2200,7 @@ input[type=submit]:focus {
 ----------------------------------------------------------------*/
 .site-header {
   position: relative;
+
 }
 .site-header .black-logo {
   display: none;
@@ -3660,6 +3663,7 @@ input[type=submit]:focus {
   color: #F56960;
   font-size: 13px;
   margin-left: 8px;
+  cursor: pointer;
 }
 .package-wrap .package-content .btn-wrap a:hover, .package-wrap .package-content .btn-wrap a:focus, .package-wrap .package-content .btn-wrap a:active {
   color: #0791BE;
@@ -4990,6 +4994,7 @@ Due to the split circle of progress-left and progress right, we must use the ani
 .testimonial-section .slick-dots {
   position: static;
   margin-top: 23px;
+
 }
 
 .testimonial-item .testimonial-img {

@@ -22,6 +22,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import {CloudinaryModule} from '@cloudinary/ng';
 
 
+
 // @ts-ignore
 @NgModule({
   bootstrap: [AppComponent],
@@ -45,7 +46,8 @@ import {CloudinaryModule} from '@cloudinary/ng';
     SlickCarouselModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    CloudinaryModule
+    CloudinaryModule,
+
   ],
   providers: [
     provideAnimationsAsync(),

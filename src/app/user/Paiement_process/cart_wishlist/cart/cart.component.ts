@@ -10,7 +10,7 @@ import {CartService} from "../../../../../service/cart/cart.service";
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-    cart: Cart = new Cart();
+    cart!: Cart ;
     quantity: number = 1;
 
     constructor(private cartService: CartService) {
@@ -40,6 +40,15 @@ export class CartComponent implements OnInit {
         if (this.quantity > 1) {
             this.quantity--;
         }
+    }
+
+    calculateGrandTotal(): number {
+        let grandTotal = 0;
+        for (let activity of this.cart.activityList) {
+            const subtotal = this.calculateSubtotal(activity.price, this.quantity);
+            grandTotal += subtotal;
+        }
+        return grandTotal;
     }
 
 }

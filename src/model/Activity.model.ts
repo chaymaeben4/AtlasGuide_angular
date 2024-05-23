@@ -1,17 +1,19 @@
-export class Activity {
-    id: number = 0;
-    designation: string = "";
-    date: Date = new Date();
-    duration: string = "";
-    location: string = "";
-    description: string = "";
-    price: number = 0;
-    category: string= "";
+import {Time} from "@angular/common";
+import {Category} from "./enumeration/Category.enum";
+import {City} from "./enumeration/City.enum";
 
-    image_path : string = "";
-    city: string= "";
-    agenceId: number= 0;
+export interface Activity {
+    id: number,
+    designation: string,
+    starteddate: Date,
+    finisheddate: Date,
+    description: string,
+    descriptiondetail: string,
+    price: number,
+    imageUrl: string,
+    category: Category,
+    location: string,
+    status: string,
 
-    constructor() {
-    }
+    city : City
 }
