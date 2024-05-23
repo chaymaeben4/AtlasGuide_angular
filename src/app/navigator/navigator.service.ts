@@ -16,7 +16,7 @@ export class NavigatorService {
     if(role != 'ROLE_USER'){
       this.router.navigate(['/dashboard'])
     }else {
-      this.router.navigate(['/account'])
+      this.router.navigate(['/'])
     }
   }
 

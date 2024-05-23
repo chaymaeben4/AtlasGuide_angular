@@ -8,7 +8,7 @@ import {Cart} from "../../model/Cart.model";
   providedIn: 'root'
 })
 export class CartService {
-  private baseUrl = 'http://localhost:8083/CityThrillsMorocco/cart';
+  private baseUrl = 'http://localhost:8080/CityThrillsMorocco/cart';
 
   private elementsCountSubject = new BehaviorSubject<number>(0);
   elementCountVariable$ = this.elementsCountSubject.asObservable();

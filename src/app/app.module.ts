@@ -51,7 +51,8 @@ import {CloudinaryModule} from '@cloudinary/ng';
     SlickCarouselModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    CloudinaryModule
+    CloudinaryModule,
+
   ],
   providers: [
     provideAnimationsAsync(),

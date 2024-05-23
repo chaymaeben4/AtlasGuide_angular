@@ -8,7 +8,7 @@ import {PaymentDetails} from "../../model/PaymentDetails.model";
 })
 export class PaymentService {
 
-  private apiUrl = 'http://localhost:8083/CityThrillsMorocco/api/payment';
+  private apiUrl = 'http://localhost:8080/CityThrillsMorocco/api/payment';
 
   private paymentMessageSubject = new Subject<boolean>();
   paymentMessage$: Observable<boolean> = this.paymentMessageSubject.asObservable();

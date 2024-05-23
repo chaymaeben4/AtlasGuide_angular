@@ -33,7 +33,6 @@ export class AuthentificationService {
     let roleName = "ROLE_USER"
     if (role) roleName = "ROLE_CONTENT_MANAGER"
     const headers = new HttpHeaders()
-      .set('Authorization', 'Bearer ' + this.sessionService.getSessionData('user').token)
       .set('Content-Type', 'application/json');
     return this.http.post<User>(environnment.authURL+'/register/'+roleName, user, {headers});
   }

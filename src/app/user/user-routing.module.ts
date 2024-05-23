@@ -9,8 +9,9 @@ import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "../admin/authentification/login/login.component";
 import {RegisterComponent} from "../admin/authentification/register/register.component";
 import {UserAccountComponent} from "./user-account/user-account.component";
+import {ActivitesByCityComponent} from "./activites-by-city/activites-by-city.component";
 import {BookingComponent} from "./user-account/booking/booking.component";
-
+import {PaymentResolver} from "../resolvers/payment/payment.resolver";
 
 const routes: Routes = [
   {path:'' , component : HomeComponent},
@@ -20,9 +21,11 @@ const routes: Routes = [
   {path:'paiement' , component : PaiementFormComponent},
   {path:'confirmation' , component : PaiementConfirmationComponent},
   {path:'wishlist' , component : WishlistComponent},
-  {path: 'UserAccount' , component : UserAccountComponent},
-  {path: 'Booking' , component : BookingComponent},
   {path:'Details/:id' , component : ActivityDetailsComponent},
+  {path: 'UserAccount' , component : UserAccountComponent},
+  {path:'activities/:city' , component : ActivitesByCityComponent},
+  {path: 'Booking' , component : BookingComponent},
+  {path:'confirmation' , component : PaiementConfirmationComponent , resolve: { state: PaymentResolver}},
 ];
 
 @NgModule({

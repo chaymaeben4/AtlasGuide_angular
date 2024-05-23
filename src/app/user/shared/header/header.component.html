@@ -1,62 +1,33 @@
 
-<header id="masthead" class="site-header header-primary">
-    <!-- header html start -->
-    <!--    <div class="top-header">-->
-    <!--        <div class="container">-->
-    <!--            <div class="row">-->
-    <!--&lt;!&ndash;                <div class="col-lg-8 d-none d-lg-block">&ndash;&gt;-->
-    <!--&lt;!&ndash;                    <div class="header-contact-info">&ndash;&gt;-->
-    <!--&lt;!&ndash;                        <ul>&ndash;&gt;-->
-    <!--&lt;!&ndash;                            <li>&ndash;&gt;-->
-    <!--&lt;!&ndash;                                <a href="#"><i class="fas fa-phone-alt"></i> +01 (977) 2599 12</a>&ndash;&gt;-->
-    <!--&lt;!&ndash;                            </li>&ndash;&gt;-->
-    <!--&lt;!&ndash;                            <li>&ndash;&gt;-->
-    <!--&lt;!&ndash;                                <a href="https://demo.bosathemes.com/cdn-cgi/l/email-protection#84edeae2ebc4d0f6e5f2e1e8aae7ebe9"><i class="fas fa-envelope"></i> <span class="__cf_email__" data-cfemail="0f6c60627f6e61764f6b60626e6661216c6062">[email&#160;protected]</span></a>&ndash;&gt;-->
-    <!--&lt;!&ndash;                            </li>&ndash;&gt;-->
-    <!--&lt;!&ndash;                            <li>&ndash;&gt;-->
-    <!--&lt;!&ndash;                                <i class="fas fa-map-marker-alt"></i> 3146 Koontz Lane, California&ndash;&gt;-->
-    <!--&lt;!&ndash;                            </li>&ndash;&gt;-->
-    <!--&lt;!&ndash;                        </ul>&ndash;&gt;-->
-    <!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-    <!--&lt;!&ndash;                </div>&ndash;&gt;-->
-    <!--                <div class="col-lg-4 d-flex justify-content-lg-end justify-content-between">-->
-    <!--                    <div class="header-social social-links">-->
-    <!--                        <ul>-->
-    <!--                            <li><a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>-->
-    <!--                            <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>-->
-    <!--                            <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>-->
-    <!--                            <li><a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>-->
-    <!--                        </ul>-->
-    <!--                    </div>-->
-    <!--                    <div class="header-search-icon">-->
-    <!--                        <button class="search-icon">-->
-    <!--                            <i class="fas fa-search"></i>-->
-    <!--                        </button>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
+<header id="masthead" class="site-header header-primary" #stickyMenu [class.sticky]="sticky">
+
     <div class="bottom-header">
         <div class="container d-flex justify-content-between align-items-center">
             <div class="site-identity">
                 <p class="site-title">
                     <a href="index.html">
-                        <img class="white-logo" src="assets/images/travele-logo.png" alt="logo">
-                        <img class="black-logo" src="assets/images/travele-logo1.png" alt="logo">
+                        <img class="white-logo" src="assets/images/logo-white.png" alt="logo">
+                        <img class="black-logo" src="assets/images/logo.png" alt="logo">
                     </a>
                 </p>
             </div>
 
             <!-- Recherche -->
-            <div class="container_search" *ngIf="isHomepage">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" [(ngModel)]="searchText" (input)="filterCities()" placeholder="Your destination">
-                <div class="search">Search</div>
-                <ul *ngIf="filteredCities.length > 0" class="suggestions">
-                    <li *ngFor="let city of filteredCities" (click)="selectCity(city)">{{ city }}</li>
-                </ul>
-            </div>
+
+                <div class="container_search" *ngIf="isHomepage">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" [(ngModel)]="searchText" (input)="filterCities()" (keydown)="onKeyDown($event)" placeholder="Your destination...">
+                    <div class="search">Search</div>
+                    <ul *ngIf="filteredCities.length > 0" class="suggestions">
+                        <li *ngFor="let city of filteredCities; let i = index"
+                            [class.selected]="selectedIndex === i"
+                            (click)="selectCity(city)"
+                            (mouseenter)="selectedIndex = i">
+                            {{ city }}
+                        </li>
+                    </ul>
+                </div>
+
 
 
 

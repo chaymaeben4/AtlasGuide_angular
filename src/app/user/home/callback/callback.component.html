@@ -17,10 +17,10 @@
           </div>
           <div class="counter-content">
                                  <span class="counter-no">
-                                    <span class="counter">{{ nombreActuelClients }}</span>K+
+                                    <span class="counter">{{ nombreActuelClients }}</span>
                                  </span>
             <span class="counter-text">
-                                    Clients Satisfaits
+                                    Satisfied Clients
                                  </span>
           </div>
         </div>
@@ -32,10 +32,10 @@
           </div>
           <div class="counter-content">
                                  <span class="counter-no">
-                                    <span class="counter">{{ nombreActuelAgences }}</span>K+
+                                    <span class="counter">{{ nombreActuelAgences >= 1000 ? '1K+' : nombreActuelAgences }} </span>
                                  </span>
             <span class="counter-text">
-                                    Agences
+                                    Agencies
                                  </span>
           </div>
         </div>
@@ -47,7 +47,7 @@
           </div>
           <div class="counter-content">
                                  <span class="counter-no">
-                                    <span class="counter">{{nombreActuelDestinations}}</span>K+
+                                    <span class="counter">{{nombreActuelDestinations}}</span>
                                  </span>
             <span class="counter-text">
                                     Destinations
@@ -62,10 +62,10 @@
           </div>
           <div class="counter-content">
                                  <span class="counter-no">
-                                    <span class="counter">{{nombreActuelActivites}}</span>K+
+                                    <span class="counter">{{ nombreTotalActivites >= 1000 ? '1K+' : nombreActuelActivites }}</span>
                                  </span>
             <span class="counter-text">
-                                    Activités
+                                    Activities
                                  </span>
           </div>
         </div>

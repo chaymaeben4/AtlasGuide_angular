@@ -17,7 +17,7 @@ import {User} from "../../models/User";
 export class ActivityService {
 
   data!: Activity[];
-  private activityYRL = environnment.authURL+ "/activities";
+  private activityYRL = environnment.authURL+ "/activity";
 
   constructor(
     private http: HttpClient,

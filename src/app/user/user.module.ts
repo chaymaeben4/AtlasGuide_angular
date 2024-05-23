@@ -12,10 +12,10 @@ import {PaiementFormComponent} from "./Paiement_process/paiement-form/paiement-f
 import {CartComponent} from "./Paiement_process/cart_wishlist/cart/cart.component";
 import {SignUpComponent} from "./supplier/sign-up/sign-up.component";
 import {LoginComponent} from "./supplier/login/login.component";
-import {FamousPlacesComponent} from "./home/famous-places/famous-places.component";
-import {FooterComponent} from "./shared/footer/footer.component";
+
+
 import {HeaderComponent} from "./shared/header/header.component";
-import {TopActivitiesComponent} from "./home/top-activities/top-activities.component";
+
 import {SliderComponent} from "./home/slider/slider.component";
 import {HomeComponent} from "./home/home.component";
 import {UserRoutingModule} from "./user-routing.module";
@@ -29,6 +29,7 @@ import {ActivitesByCityComponent} from "./activites-by-city/activites-by-city.co
 import { UserSidebarComponent } from './user-sidebar/user-sidebar.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { BookingComponent } from './user-account/booking/booking.component';
+import {FooterComponent} from "./shared/footer/footer.component";
 
 
 
@@ -37,10 +38,8 @@ import { BookingComponent } from './user-account/booking/booking.component';
     declarations: [
       HomeComponent,
       SliderComponent,
-      TopActivitiesComponent,
       HeaderComponent,
       FooterComponent,
-      FamousPlacesComponent,
       LoginComponent,
       SignUpComponent,
       CartComponent,
